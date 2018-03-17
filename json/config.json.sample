@@ -1,0 +1,10 @@
+{
+    "prefix" : "*",
+    "token" : "YOUR_TOKEN_GOES_HERE",
+    "sens_de_la_vie": 42,
+    "passwords_array": ["please", "dont", "hack", "me"],
+    "secret_passcodes": {
+        "bank": 1234,
+        "home": 4321
+    }
+}
