@@ -16,44 +16,6 @@ function is_empty(obj) {
 
 module.exports = {
 	name : 'vote',
-	description : "Permet de gerer un systeme de vote",
-	usage :'`*vote <instruction> <parametres>`\n'+
-	'***Instructions:***\n'+
-	'***CREATE***\n'+
-	'Cree un nouveau sobdage\n'+
-	'```md\n*vote create <nom> \`\`\`<description>\`\`\` \`\`\`<options>\`\`\` \n```\n'+
-	'***UPDATE***\n'+
-	'Permet de modifier les donnees d\'un sondage\n'+
-	'`*vote update <nomActuel> \`\`\`n <nouveauNom>\`\`\` \`\`\`d <nouvelleDescription>\`\`\` \`\`\`o <nouvellesOptions>\`\`\` `\n'+
-	'- Les champs a remplacer sont tous optionnels.\n'+
-	'- Si vous souhaitez conserver une de vos options, indiquez * a son emplacement.\n'+
-	'***REMOVE***\n'+
-	'Efface un sondage\n'+
-	'`*vote remove <nomDuSondage>`\n'+
-	'Vous devez etre le createur du sondage vise pour l\'effacer.\n'+
-	'***OPEN***\n'+
-	'Ouvre un sondage aux votes\n'+
-	'`*vote open <nomDuSondage>`\n'+
-	'Vous devez etre le createur du sondage vise pour l\'ouvrir.\n'+
-	'***CLOSE***\n'+
-	'Ferme un sondage aux votes\n'+
-	'`*vote close <nomDuSondage>`\n'+
-	'Vous devez etre le createur du sondage vise pour le fermer.\n'+
-	'***CHOOSE***\n'+
-	'Permet de voter pour une des options d\'un sondage\n'+
-	'` *vote choose <nomDuSondage> <numeroOption>`\n'+
-	'- Pour retirer votre vote specifiez le numero de l\'option pour laquelle vous avez vote. Retrouvez votre choix grace a la commande `*vote my <nomDuSondage>`\n'+
-	'- Pour changer de vote indiquez le numero de la nouvelle option.\n'+
-	'***MY***\n'+
-	'Affiche l\'option pour laquelle vous avez vote\n'+
-	'`*vote my <nomDuSondage> `\n'+
-	'***LIST***\n'+
-	'Affiche la liste des sondages\n'+
-	'`*vote list <nomDuSondage> `\n'+
-	'- Si le nom du sondage est specifie, seul ce dernier sera affiche.\n'+
-	'***RESULT***\n'+
-	'Affiche les resultats d\'un sondage\n'+
-	'`*vote result <nomDuSondage> `\n',
 	execute(message, args, client){
 		const instruction = args[0];
 		args = args.slice(1);
@@ -62,7 +24,7 @@ module.exports = {
 				&& instruction != 'execute')
 			this[instruction](message, args, client);
 		else
-			message.reply('***'+instruction+'*** n\'est pas une instruction valide.');
+			global.Msg.error('***'+instruction+'*** n\'est pas une instruction valide.');
 	},
 
 	create: function(message, args, client) {
@@ -90,12 +52,11 @@ module.exports = {
 		}
 		var obj = require('../../json/votes.json');
 		if (obj[vote.name] != undefined)
-			return message.reply('Un sondage avec ce nom existe deja');
+			return global.Msg.error('Un sondage avec ce nom existe deja');
 		obj[vote.name] = vote;
 		obj = JSON.stringify(obj);
-		global.fs.writeFile('./json/votes.json', obj, 'utf8', function () {
-			message.channel.send('Vote cree avec succes');
-		});
+		global.Msg.valid('Vote cree avec succes');
+		global.fs.writeFile('./json/votes.json', obj, 'utf8', function () {});
 	},
 
 	update: function(message, args, client) {
@@ -108,11 +69,11 @@ module.exports = {
 		let options = null;
 		args = args.slice(1);
 		if (is_empty(data))
-			message.reply('Aucun sondage cree a ce jour.');
+			return global.Msg.error('Aucun sondage cree a ce jour.');
 		else if (data[vote] != null && data[vote].owner != message.author.id)
-			return message.reply('Vous ne disposez pas des permissions requises pour cette action.');
+			return global.Msg.error('Vous ne disposez pas des permissions requises pour cette action.');
 		else if (data[vote] == null)
-			return message.reply('Sondage non trouve.');
+			return global.Msg.error('Sondage non trouve.');
 		for (value of args)
 		{
 			if (value == '' || value == '\n')
@@ -143,6 +104,7 @@ module.exports = {
 				j++;
 		}
 		data = JSON.stringify(data);
+		global.Msg.valid("Sondage mis a jour avec succes");
 		global.fs.writeFile('./json/votes.json', data, 'utf8', function () {});
 	},
 
@@ -150,16 +112,16 @@ module.exports = {
 		args = args.join(' ');
 		var data = require('../../json/votes.json');
 		if (is_empty(data))
-			message.reply('Aucun sondage cree a ce jour.');
+			global.Msg.error('Aucun sondage cree a ce jour.');
 		else if (data[args] != null && data[args].owner != message.author.id)
-			message.reply('Vous ne disposez pas des permissions requises pour cette action.');
+			global.Msg.error('Vous ne disposez pas des permissions requises pour cette action.');
 		else if (data[args] == null)
-			message.reply('Sondage non trouve.');
+			global.Msg.error('Sondage non trouve.');
 		else
 		{
 			delete data[args];
 			data = JSON.stringify(data);
-			message.reply('Vote efface avec succes');
+			global.Msg.valid('Vote efface avec succes');
 			global.fs.writeFile('./json/votes.json', data, 'utf8', function () {});
 		}
 	},
@@ -168,14 +130,14 @@ module.exports = {
 		args = args.join(' ');
 		var data = require('../../json/votes.json');
 		if (is_empty(data))
-			message.reply('Aucun sondage cree a ce jour.');
+			global.Msg.error('Aucun sondage cree a ce jour.');
 		else if (data[args] != null && data[args].owner != message.author.id)
-			message.reply('Vous ne disposez pas des permissions requises pour cette action.');
+			global.Msg.error('Vous ne disposez pas des permissions requises pour cette action.');
 		else if (data[args] == null)
-			message.reply('Sondage non trouve.');
+			global.Msg.error('Sondage non trouve.');
 		data[args].closed = 0;
 		data = JSON.stringify(data);
-		message.reply('Sondage ouvert au vote');
+		global.Msg.valid('Sondage ouvert au vote');
 		global.fs.writeFile('./json/votes.json', data, 'utf8', function () {});
 	},
 
@@ -183,14 +145,14 @@ module.exports = {
 		args = args.join(' ');
 		var data = require('../../json/votes.json');
 		if (is_empty(data))
-			message.reply('Aucun sondage cree a ce jour.');
+			global.Msg.error('Aucun sondage cree a ce jour.');
 		else if (data[args] != null && data[args].owner != message.author.id)
-			message.reply('Vous ne disposez pas des permissions requises pour cette action.');
+			global.Msg.error('Vous ne disposez pas des permissions requises pour cette action.');
 		else if (data[args] == null)
-			message.reply('Sondage non trouve.');
+			global.Msg.error('Sondage non trouve.');
 		data[args].closed = 1;
 		data = JSON.stringify(data);
-		message.reply('Sondage ferme au vote');
+		global.Msg.valid('Sondage ferme au vote');
 		global.fs.writeFile('./json/votes.json', data, 'utf8', function () {});
 	},
 
@@ -201,14 +163,24 @@ module.exports = {
 			var index = has_voted(message.author.id, data.options);
 			if (index != -1)
 			{
-				var label = data.options[index].label;
-				message.reply('Vous avez vote pour l\'option '+(index + 1)+': ***'+label+'***');
+				let user = client.users.find('id', data.owner).username;
+				let avatar = client.users.find('id', data.owner).avatarURL;
+				let date = new Date(data.date);
+				date = date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear()+' ('+date.getHours()+':'+date.getMinutes()+')';
+
+				const embed = new Discord.RichEmbed()
+				.setTitle(data.name)
+				.setAuthor(user+" | "+date, avatar)
+				.addField("Vous avez vote pour l'option:", "**"+(index + 1)+")** "+data.options[index].label)
+				.setColor(data.closed ? 0xFF0000 : 0x00FF00);
+
+				message.channel.send({embed});
 			}
 			else
-				message.reply('Vous n\'avez pas vote pour ce sondage');
+				global.Msg.error('Vous n\'avez pas vote pour ce sondage');
 		}
 		else
-			message.reply('Sondage non trouve');
+			global.Msg.error('Sondage non trouve.');
 	},
 
 	list: function(message, args = [], client) {
@@ -222,23 +194,28 @@ module.exports = {
 				if (!is_empty(obj))
 				{
 					let regex = new RegExp('\n', "g");
-					let msg = '';
 					if (args != '' && obj[args] == undefined)
-						return message.reply('Sondage non trouve.');
+						return global.Msg.error('Sondage non trouve.');
 					for (key in obj)
 					{
 						if (args != '' && obj[key].name != args)
 							continue;
 						let user = client.users.find('id', obj[key].owner).username;
+						let avatar = client.users.find('id', obj[key].owner).avatarURL;
 						let date = new Date(obj[key].date);
 						date = date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear()+' ('+date.getHours()+':'+date.getMinutes()+')';
-						msg += date+' | '+obj[key].name+'\n'+
-						'***Auteur:*** '+user+' | ***Etat:*** '+(obj[key].closed ? 'Ferme' : 'Ouvert')+'\n\n';
+
+						const embed = new Discord.RichEmbed()
+						.setTitle(obj[key].name)
+						.setAuthor(user+" | "+date, avatar)
+
+						.setColor(obj[key].closed ? 0xFF0000 : 0x00FF00);
+
+						message.channel.send({embed});
 					}
-					message.channel.send(msg);
 				}
 				else
-					message.channel.send('Aucun sondage cree a ce jour.');
+					global.Msg.error('Aucun sondage cree a ce jour.');
 			}
 		});
 	},
@@ -253,23 +230,23 @@ module.exports = {
 
 	choose: function(message, args, client) {
 		if (args.length < 2)
-			return message.reply('Choisissez un vote et une option de reponse.');
+			return global.Msg.error('Choisissez un vote et une option de reponse.');
 		let data = require('../../json/votes.json');
 		let option = args[args.length - 1] - 1;
 		args = args.slice(0, args.length - 1).join(' ');
 		if (is_empty(data))
-			message.reply('Aucun sondage publie a ce jour.');			
+			return global.Msg.error('Aucun sondage publie a ce jour.');			
 		else if (data[args] == null)
-			return message.reply('Le vote choisi est invalide');
+			return global.Msg.error('Le vote choisi est invalide');
 		else if (data[args].options[option] == undefined)
-			return message.reply('L\'option choisie est invalide.');
+			return global.Msg.error('L\'option choisie est invalide.');
 		else if (data[args].closed)
-			return message.reply('Ce sondage est ferme au vote');
+			return global.Msg.error('Ce sondage est ferme au vote');
 		else if (data[args].options[option].votes.includes(message.author.id))
 		{
 			let index = data[args].options[option].votes.indexOf(message.author.id);
 			data[args].options[option].votes.splice(index, 1);
-			message.reply('Vous avez annule votre vote.');
+			global.Msg.send('Vous avez annule votre vote.');
 		}
 		else
 		{
@@ -277,14 +254,14 @@ module.exports = {
 			if (voted == -1)
 			{
 				data[args].options[option].votes.push(message.author.id);
-				message.reply('Vote enregistre');
+				global.Msg.valid('Vote enregistre');
 			}
 			else
 			{
 				let index = data[args].options[voted].votes.indexOf(message.author.id);
 				data[args].options[voted].votes.splice(index, 1);
 				data[args].options[option].votes.push(message.author.id);
-				message.reply('Vote modifie');
+				global.Msg.valid('Vote modifie');
 			}
 		}
 		data = JSON.stringify(data);
@@ -297,17 +274,25 @@ module.exports = {
 		if (data != null)
 		{
 			let user = client.users.find('id', data.owner).username;
+			let avatar = client.users.find('id', data.owner).avatarURL;
 			let date = new Date(data.date);
 			date = date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear()+' ('+date.getHours()+':'+date.getMinutes()+')';
-			let msg = date+" | ***"+data.name+"***\n"+
-			data.description+"\n"+
-			'***Auteur:*** '+user+' | ***Etat:*** '+(data.closed ? 'Ferme' : 'Ouvert')+'\n'+
-			"***Resultats:***\n";
-			for(let i = 0; i < data.options.length; i++)
-				msg += (i+1)+") "+data.options[i].label+" **"+data.options[i].votes.length+"**\n";
-			message.channel.send(msg);
+
+			const embed = new Discord.RichEmbed()
+			.setTitle(data.name)
+			.setAuthor(user+" | "+date, avatar)
+
+			.setColor(data.closed ? 0xFF0000 : 0x00FF00)
+			.setDescription(data.description)
+			.setFooter(data.closed ? "Sondage Ferme" : "Sondage Ouvert", data.closed ? "http://www.csw-iba.org/swfu/d/lock.png" : "http://icons.iconarchive.com/icons/double-j-design/diagram-free/128/lock-unlock-icon.png")
+			.setThumbnail("https://www.soils.org/files/images/science-policy/check-box.png");
+
+			for (let i = 0; i < data.options.length; i++)
+				embed.addField((i + 1)+") "+data.options[i].label, "**"+data.options[i].votes.length+"** voix");
+
+			message.channel.send({embed});
 		}
 		else
-			message.channel.send('Aucun vote ne correspond a votre recherche.');
+			global.Msg.error('Aucun vote ne correspond a votre recherche.');
 	}
 };

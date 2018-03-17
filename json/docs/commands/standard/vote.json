@@ -2,6 +2,15 @@
 	"name": "vote - gere un systeme de sondages",
 	"synopsis": "**\\*vote** [instruction] [__arguments__]",
 	"description": "La commande vote permet de creer des sondages et de gerer leur contenu et leurs acces. Certaines instructions vous permettront de participer aux sondages existants et donneront acces aux resultats des votes.",
-	"instructions": "test",
+	"instructions": "Les instructions donnent acces a diverses specificites des sondages.",
+	"create": "Cree un nouveau sobdage\n**\\*vote** create [nom] \\`\\`\\`[description]\\`\\`\\` \\`\\`\\`[options]\\`\\`\\`",
+	"update": "Permet de modifier les donnees d\\'un sondage\n**\\*vote** update [nomActuel] \\`\\`\\`n [nouveauNom]\\`\\`\\` \\`\\`\\`d [nouvelleDescription]\\`\\`\\` \\`\\`\\`o [nouvellesOptions]\\`\\`\\`\n- Les champs a remplacer sont tous optionnels.\n- Si vous souhaitez conserver une de vos options, indiquez * a son emplacement.",
+	"remove": "Efface un sondage\n**\\*vote** remove [nomDuSondage]\nVous devez etre le createur du sondage vise pour l\\'effacer.",
+	"open": "Ouvre un sondage aux votes\n**\\*vote** open [nomDuSondage]\nVous devez etre le createur du sondage vise pour l\\'ouvrir.",
+	"close": "Ferme un sondage aux votes\n**\\*vote** close [nomDuSondage]\nVous devez etre le createur du sondage vise pour le fermer.",
+	"choose": "Permet de voter pour une des options d\\'un sondage\n**\\*vote** choose [nomDuSondage] [numeroOption]\n- Pour retirer votre vote specifiez le numero de l\\'option pour laquelle vous avez vote. Retrouvez votre choix grace a la commande `*vote my <nomDuSondage>`\n- Pour changer de vote indiquez le numero de la nouvelle option.",
+	"my": "Affiche l\\'option pour laquelle vous avez vote\n**\\*vote** my [nomDuSondage]\n",
+	"list": "Affiche la liste des sondages\n**\\*vote** list [nomDuSondage]\n- Si le nom du sondage est specifie, seul ce dernier sera affiche.",
+	"result": "Affiche les resultats d\\'un sondage\n**\\*vote** result [nomDuSondage]",
 	"author": "AntrHaXx"
 }

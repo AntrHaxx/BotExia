@@ -1,7 +1,5 @@
 module.exports = {
     name : 'help',
-    description : "Liste de toutes les commandes \n Pour plus d'info : *help <NomDeLaCommande",
-    usage : '`*help`',
     execute(message, args, client){
         if (!args.length) {
             // Recuperer la liste des commandes

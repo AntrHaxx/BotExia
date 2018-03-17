@@ -2,6 +2,7 @@ global.fs = require('fs');
 global.Discord = require('discord.js');
 global.client = new Discord.Client();
 global.config = require('./json/config.json');
+global.Msg = require('./helpers/msg');
 const Command = require('./helpers/command');
 
 client.commands = Command.loadAll();
@@ -15,6 +16,7 @@ client.on('message', message => {
 
 	const args = message.content.slice(config.prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
+	Msg.set(message);
 
 	try {
 		for (category in client.commands)
