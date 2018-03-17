@@ -35,7 +35,7 @@ module.exports = {
             if (command == null)
                 return message.reply('La commande **'+args[0]+'** n\'est pas une commande valide.\nTapez **'+global.config.prefix+'help** pour avoir la liste des commandes');
             else if (command.doc == null)
-                return message.reply('Aucune documentation existante pour cette commande.');
+                return message.reply('Aucune documentation existante pour la commande **'+command.name+'**.');
             // Afficher la commande trouvee
             let doc = command.doc;
             let msg = {embed: {
