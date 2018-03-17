@@ -1,0 +1,7 @@
+{
+	"name": "vote - gere un systeme de sondages",
+	"synopsis": "**\\*vote** [instruction] [__arguments__]",
+	"description": "La commande vote permet de creer des sondages et de gerer leur contenu et leurs acces. Certaines instructions vous permettront de participer aux sondages existants et donneront acces aux resultats des votes.",
+	"instructions": "test",
+	"author": "AntrHaXx"
+}

@@ -1,0 +1,6 @@
+{
+	"name": "help - manuel de reference des commande",
+	"synopsis": "**\\*help**\n**\\*help** [__command__]",
+	"description": "La commande help permet d'afficher la liste des commandes disponibles. Si le nom d'une commande est specifie, alors le manuel complet de la commande en question sera affiche.",
+	"author": "AntrHaXx"
+}

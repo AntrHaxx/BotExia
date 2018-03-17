@@ -1,0 +1,7 @@
+{
+	"name": "send - envoyer un message vers un channel",
+	"synopsis": "**\\*send** [channel] [message]",
+	"description": "send vous permet d'envoyer un message vers n'importe quel channel du serveur.",
+	"exemple": "`*send debug Coucou, je teste la commande send!`",
+	"author": "AntrHaXx"
+}

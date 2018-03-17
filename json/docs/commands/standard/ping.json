@@ -1,0 +1,6 @@
+{
+	"name": "ping - reponds Pong!",
+	"synopsis": "**\\*ping**",
+	"description": "Cette commande est utilisee pour tester la connection du bot a Discord. Si le bot repond Pong!, c'est qu'il est en ligne. Dans le cas contraire, on peut considerer qu'il est deconnecte ou qu'une panne s'est produite.",
+	"author": "Captain Baroud"
+}
