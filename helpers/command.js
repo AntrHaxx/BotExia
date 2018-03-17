@@ -55,7 +55,12 @@ module.exports.Category = function(category, name = null)
 			if (fs.lstatSync('./commands/'+_category+'/' +file).isFile())
 			{
 		    	let command = require('../commands/'+_category+'/' +file);
-				command.doc = require('../json/docs/commands/'+_category+'/' +file+'on');
+		    	try {
+					command.doc = require('../json/docs/commands/'+_category+'/' +file+'on');
+		    	}
+				catch (e) {
+					command.doc = null;
+				}
 		    	_commands.set(command.name, command);
 		    	_commands_names.push(command.name);
 			}
