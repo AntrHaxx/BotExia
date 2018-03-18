@@ -32,7 +32,7 @@ var Msg = function () {
 		_message.channel.send({embed});
 	};
 
-	this.format = function(format) {
+	this.format = function(format, type = "send", target = null) {
 		const embed = new Discord.RichEmbed();
 		if (format.color != undefined)
 			embed.setColor(format.color);
@@ -60,9 +60,9 @@ var Msg = function () {
 			let icon_url = format.author.icon_url != undefined ? format.footer.icon_url : null;
 			embed.setFooter(text, icon_url);
 		}
-		if (format.fields != undefined && typeof format.fields == "array")
+		if (format.fields != undefined && typeof format.fields == "object" && format.fields != null)
 		{
-			for (data in format.fields)
+			for (data of format.fields)
 			{
 				if (data.name != undefined && data.value != undefined)
 					embed.addField(data.name, data.value);
@@ -71,7 +71,15 @@ var Msg = function () {
 			}
 		}
 
-		_message.channel.send({embed});
+		if (type == "send")
+			if (target != null)
+				global.client.channels.find('name', target).send({embed});
+			else
+				_message.channel.send({embed});
+		else if (type == "reply")
+			_message.reply({embed});
+		else
+			console.log('Type de message invalide, choisissez entre "send" et "reply".');
 	};
 };
 

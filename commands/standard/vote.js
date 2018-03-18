@@ -14,6 +14,14 @@ function is_empty(obj) {
 	return true;
 };
 
+var find = function(message, args = [], client) {
+	args = args.join(' ');
+	var data = require('../../json/votes.json');
+	if (data[args] != undefined)
+		return data[args];
+	return null;
+}
+
 module.exports = {
 	name : 'vote',
 	execute(message, args, client){
@@ -157,7 +165,7 @@ module.exports = {
 	},
 
 	my: function(message, args, client) {
-		var data = this.find(message, args, client);	
+		var data = find(message, args, client);	
 		if (data != null)
 		{
 			var index = has_voted(message.author.id, data.options);
@@ -168,13 +176,12 @@ module.exports = {
 				let date = new Date(data.date);
 				date = date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear()+' ('+date.getHours()+':'+date.getMinutes()+')';
 
-				const embed = new Discord.RichEmbed()
-				.setTitle(data.name)
-				.setAuthor(user+" | "+date, avatar)
-				.addField("Vous avez vote pour l'option:", "**"+(index + 1)+")** "+data.options[index].label)
-				.setColor(data.closed ? 0xFF0000 : 0x00FF00);
-
-				message.channel.send({embed});
+				global.Msg.format({
+					title: data.name,
+					author: {name: user+" | "+date, avatar},
+					fields: [{name: "Vous avez vote pour l'option:", value: "**"+(index + 1)+")** "+data.options[index].label}],
+					color: data.closed ? 0xFF0000 : 0x00FF00
+				});
 			}
 			else
 				global.Msg.error('Vous n\'avez pas vote pour ce sondage');
@@ -185,6 +192,7 @@ module.exports = {
 
 	list: function(message, args = [], client) {
 		args = args.join(' ');
+		let self = this;
 		global.fs.readFile('./json/votes.json', 'utf8', function readFileCallback(err, data){
 			if (err)
 				console.log(err);
@@ -194,38 +202,28 @@ module.exports = {
 				if (!is_empty(obj))
 				{
 					let regex = new RegExp('\n', "g");
-					if (args != '' && obj[args] == undefined)
+					if (args != '' && obj[args] != undefined)
+						return self.result(message, args.split(' '), client);
+					else if (args != '' && obj[args] == undefined)
 						return global.Msg.error('Sondage non trouve.');
 					for (key in obj)
 					{
-						if (args != '' && obj[key].name != args)
-							continue;
 						let user = client.users.find('id', obj[key].owner).username;
 						let avatar = client.users.find('id', obj[key].owner).avatarURL;
 						let date = new Date(obj[key].date);
 						date = date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear()+' ('+date.getHours()+':'+date.getMinutes()+')';
 
-						const embed = new Discord.RichEmbed()
-						.setTitle(obj[key].name)
-						.setAuthor(user+" | "+date, avatar)
-
-						.setColor(obj[key].closed ? 0xFF0000 : 0x00FF00);
-
-						message.channel.send({embed});
+						global.Msg.format({
+							title: obj[key].name,
+							author: {name: user+" | "+date, icon_url: avatar},
+							color: obj[key].closed ? 0xFF0000 : 0x00FF00,
+						});
 					}
 				}
 				else
 					global.Msg.error('Aucun sondage cree a ce jour.');
 			}
 		});
-	},
-
-	find: function(message, args = [], client) {
-		args = args.join(' ');
-		var data = require('../../json/votes.json');
-		if (data[args] != undefined)
-			return data[args];
-		return null;
 	},
 
 	choose: function(message, args, client) {
@@ -266,11 +264,10 @@ module.exports = {
 		}
 		data = JSON.stringify(data);
 		global.fs.writeFile('./json/votes.json', data, 'utf8', function () {});
-			
 	},
 
 	result: function(message, args, client) {
-		data = this.find(message, args, client);
+		data = find(message, args, client);
 		if (data != null)
 		{
 			let user = client.users.find('id', data.owner).username;
@@ -278,19 +275,22 @@ module.exports = {
 			let date = new Date(data.date);
 			date = date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear()+' ('+date.getHours()+':'+date.getMinutes()+')';
 
-			const embed = new Discord.RichEmbed()
-			.setTitle(data.name)
-			.setAuthor(user+" | "+date, avatar)
-
-			.setColor(data.closed ? 0xFF0000 : 0x00FF00)
-			.setDescription(data.description)
-			.setFooter(data.closed ? "Sondage Ferme" : "Sondage Ouvert", data.closed ? "http://www.csw-iba.org/swfu/d/lock.png" : "http://icons.iconarchive.com/icons/double-j-design/diagram-free/128/lock-unlock-icon.png")
-			.setThumbnail("https://www.soils.org/files/images/science-policy/check-box.png");
-
+			let fields = [];
 			for (let i = 0; i < data.options.length; i++)
-				embed.addField((i + 1)+") "+data.options[i].label, "**"+data.options[i].votes.length+"** voix");
+				fields.push({name: (i + 1)+") "+data.options[i].label, value: "**"+data.options[i].votes.length+"** voix"});
 
-			message.channel.send({embed});
+			global.Msg.format({
+				title: data.name,
+				author: {name: user+" | "+date, avatar},
+				description: data.description,
+				color: data.closed ? 0xFF0000 : 0x00FF00,
+				thumbnail: "https://www.soils.org/files/images/science-policy/check-box.png",
+				fields: fields,
+				footer: {
+					text: data.closed ? "Sondage Ferme" : "Sondage Ouvert",
+					icon_url: data.closed ? "http://www.csw-iba.org/swfu/d/lock.png" : "http://icons.iconarchive.com/icons/double-j-design/diagram-free/128/lock-unlock-icon.png"
+				}
+			});
 		}
 		else
 			global.Msg.error('Aucun vote ne correspond a votre recherche.');
