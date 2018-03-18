@@ -12,8 +12,8 @@ module.exports = {
         const resultat = commands[0];
         const info = args.length ? args.shift().toLowerCase() : null;
 
-        var other = global.client.channels.find('name', 'on-manj-ou');
-        var debug = global.client.channels.find('name', 'debug');
+        var other = Client.channels.find('name', 'on-manj-ou');
+        var debug = Client.channels.find('name', 'debug');
 
         if (!info.length) {
 			message.channel.send('N\'oulie pas de mettre le channel');

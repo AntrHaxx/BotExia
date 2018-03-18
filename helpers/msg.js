@@ -1,34 +1,52 @@
 var Msg = function () {
 	var _message;
+	var _colors = {
+		default: 0xCCCCCC,
+		info: 0x33CCFF,
+		success: 0x00FF00,
+		warning: 0xFF6600,
+		error: 0XFF0000
+	};
 
 	this.set = function (message) {
 		_message = message;
 	};
 
 	this.channel_exists = function(channel) {
-		return global.client.channels.find('name', channel) != null;
+		return Client.channels.find('name', channel) != null;
 	}
 
-	this.send = function(message, target = null, type = "send") {
+	this.info = function(message, target = null, type = "send") {
 		return this.format({
 			description: message,
 			author: {
 				name: _message.author.username,
 				icon_url: _message.author.avatarURL
 			},
-			color: 0x00AE86
-		}, type, target);
+			color: _colors.info
+		}, target, type);
 	};
 
-	this.valid = function(messag, target = null, type = "reply") {
+	this.success = function(messag, target = null, type = "reply") {
 		return this.format({
 			description: message,
 			author: {
 				name: _message.author.username,
 				icon_url: _message.author.avatarURL
 			},
-			color: 0x00FF00
-		}, type, target);
+			color: _colors.success
+		}, target, type);
+	};
+
+	this.warning = function(message, target = null, type = "reply") {
+		return this.format({
+			description: message,
+			author: {
+				name: _message.author.username,
+				icon_url: _message.author.avatarURL
+			},
+			color: _colors.warning
+		}, target, type);
 	};
 
 	this.error = function(message, target = null, type = "reply") {
@@ -38,14 +56,23 @@ var Msg = function () {
 				name: _message.author.username,
 				icon_url: _message.author.avatarURL
 			},
-			color: 0xFF0000
-		}, type, target);
+			color: _colors.error
+		}, target, type);
 	};
 
-	this.format = function(format, type = "send", target = null) {
+	this.format = function(format, target = null, type = "send") {
 		const embed = new Discord.RichEmbed();
+		if (format.embed != undefined)
+			format = format.embed;
 		if (format.color != undefined)
-			embed.setColor(format.color);
+		{
+			if (_colors[format.color] != undefined)
+				embed.setColor(_colors[format.color]);
+			else
+				embed.setColor(format.color);
+		}
+		else
+			embed.setColor(_colors.info);
 		if (format.title != undefined)
 			embed.setTitle(format.title);
 		if (format.description != undefined)
@@ -83,11 +110,14 @@ var Msg = function () {
 
 		if (is_empty(format) ||
 			(target != null && !this.channel_exists(target)))
+		{
+			console.log("Channel "+target+" invalide");
 			return false;
+		}
 
 		if (type == "send")
 			if (target != null)
-				global.client.channels.find('name', target).send({embed});
+				Client.channels.find('name', target).send({embed});
 			else
 				_message.channel.send({embed});
 		else if (type == "reply")
@@ -101,7 +131,7 @@ var Msg = function () {
 	};
 
 	var is_empty = function(obj) {
-		for (let key in obj)
+		for (key in obj)
 			return false;
 		return true;
 	};

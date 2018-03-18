@@ -82,4 +82,23 @@ module.exports.loadAll = function(data = [])
 			commands[cat] = new module.exports.Category(cat);
 	}
 	return commands;
-}
+};
+
+module.exports.is_allowed = function (message, command)
+{
+	let all = false;
+	for (type in command.permissions)
+	{
+		let perm = command.permissions[type];
+		if (type == message.channel.type)
+			return (perm == "*" || module.exports.has_role(message, perm)) ? true : false;
+		else if (type == "*" && (perm == "*" || module.exports.has_role(message, perm)))
+			all = true;
+	}
+	return all;
+};
+
+module.exports.has_role = function(message, roles)
+{
+	return true;
+};
