@@ -76,7 +76,7 @@ var Msg = function () {
 				if (data.name != undefined && data.value != undefined)
 					embed.addField(data.name, data.value);
 				else if(typeof data == 'boolean')
-					embed.addBlankField(data);
+					embed.addBlankField(!data);
 			}
 		}
 
