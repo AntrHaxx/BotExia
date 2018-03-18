@@ -21,15 +21,15 @@ module.exports = {
             "fields": [
               {
                 "name" : "Nom",
-                "value" : "Nom de la commande : " +client.commands.standard.name
+                "value" : "Nom de la commande : " +client.commands.standard.name || client.commands.prosit.name
               },
               {
                 "name": "Description",
-                "value" :  ""+client.commands.standard.description
+                "value" :  ""+client.commands.standard.description || client.commands.prosit.description
               },
               {
                 "name" : "Commande",
-                "value" : ""+client.commands.standard.usage
+                "value" : ""+client.commands.standard.usage || client.command.prosit.usage
               },
             ]
           };
@@ -38,7 +38,7 @@ module.exports = {
 			message.channel.send('N\'oulis pas de mettre le nom de la commande');
 		}
 		else {
-            if(!client.commands.standard.command){
+            if(!client.commands.standard.command || !client.commands.prosit.command){
                 message.channel.send("Ce n\'est pas une commande valide")
             }
             else{
