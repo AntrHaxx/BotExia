@@ -1,8 +1,9 @@
-
 module.exports = {
 	name: "doc",
-	type: ["dm"],
-	roles: ["admin"],
+	permissions: {
+		"dm": ["admin"],
+		"*": ["none"]
+	},
 	execute: function(message, args, client) {
 		if (!args.length)
 			return Msg.info("indiquer la section de documentation a lire ainsi que la source.");

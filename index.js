@@ -28,10 +28,10 @@ Client.on('message', message => {
         //console.log(client.commands.list());
         if (command != null)
         {
-        	if (command.type == undefined || command.type.includes(message.channel.type))
-            	command.execute(message, args, Client);
-            else
-            	Msg.error("Cette commande n'est pas permise dans ce type de channel.");
+        	if (Command.is_allowed(message, command))
+	           	command.execute(message, args, Client);
+        	else
+	           	Msg.error("Vous n'avez pas les permissions requises pour acceder a cette commande.");
 		}
 	}
 	catch (error) {	
