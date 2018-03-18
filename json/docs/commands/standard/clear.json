@@ -1,0 +1,6 @@
+{
+	"name": "clear",
+	"synopsis": "**\\*clear <Nbr de msg a clear>**",
+	"description": "Clear un nombre definis de message, Attention max de 99 messages.",
+	"author": "CaptainBaroud"
+}

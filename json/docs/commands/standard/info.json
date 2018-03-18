@@ -1,0 +1,7 @@
+{
+	"name": "info",
+	"synopsis": "**\\*info** [commande]",
+	"description": "send vous permet d'envoyer un message vers n'importe quel channel du serveur.",
+	"exemple": "`*send debug Coucou, je teste la commande send!`",
+	"author": "AntrHaXx"
+}
