@@ -5,31 +5,40 @@ var Msg = function () {
 		_message = message;
 	};
 
-	this.send = function(message) {
+	this.send = function(message, target = null) {
 		const embed = new Discord.RichEmbed()
 		.setAuthor(_message.author.username, _message.author.avatarURL)
 		.setDescription(message)
 		.setColor(0x00AE86);
 
-		_message.channel.send({embed});
+		if (target != null)
+			global.client.channels.find('name', target).send({embed});
+		else
+			_message.channel.send({embed});
 	};
 
-	this.valid = function(message) {
+	this.valid = function(messag, target = null) {
 		const embed = new Discord.RichEmbed()
 		.setAuthor(_message.author.username, _message.author.avatarURL)
 		.setDescription(message)
 		.setColor(0x00FF00);
 
-		_message.channel.send({embed});
+		if (target != null)
+			global.client.channels.find('name', target).send({embed});
+		else
+			_message.channel.send({embed});
 	};
 
-	this.error = function(message) {
+	this.error = function(message, target = null) {
 		const embed = new Discord.RichEmbed()
 		.setAuthor(_message.author.username, _message.author.avatarURL)
 		.setDescription(message)
 		.setColor(0xFF0000);
 
-		_message.channel.send({embed});
+		if (target != null)
+			global.client.channels.find('name', target).send({embed});
+		else
+			_message.channel.send({embed});
 	};
 
 	this.format = function(format, type = "send", target = null) {
