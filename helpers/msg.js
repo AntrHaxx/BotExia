@@ -20,7 +20,7 @@ var Msg = function () {
 		}, type, target);
 	};
 
-	this.valid = function(messag, target = null, ty[e = "reply"]) {
+	this.valid = function(messag, target = null, type = "reply") {
 		return this.format({
 			description: message,
 			author: {
