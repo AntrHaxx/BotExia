@@ -5,40 +5,41 @@ var Msg = function () {
 		_message = message;
 	};
 
-	this.send = function(message, target = null) {
-		const embed = new Discord.RichEmbed()
-		.setAuthor(_message.author.username, _message.author.avatarURL)
-		.setDescription(message)
-		.setColor(0x00AE86);
+	this.channel_exists = function(channel) {
+		return global.client.channels.find('name', channel) != null;
+	}
 
-		if (target != null)
-			global.client.channels.find('name', target).send({embed});
-		else
-			_message.channel.send({embed});
+	this.send = function(message, target = null, type = "send") {
+		return this.format({
+			description: message,
+			author: {
+				name: _message.author.username,
+				icon_url: _message.author.avatarURL
+			},
+			color: 0x00AE86
+		}, type, target);
 	};
 
-	this.valid = function(messag, target = null) {
-		const embed = new Discord.RichEmbed()
-		.setAuthor(_message.author.username, _message.author.avatarURL)
-		.setDescription(message)
-		.setColor(0x00FF00);
-
-		if (target != null)
-			global.client.channels.find('name', target).send({embed});
-		else
-			_message.channel.send({embed});
+	this.valid = function(messag, target = null, ty[e = "reply"]) {
+		return this.format({
+			description: message,
+			author: {
+				name: _message.author.username,
+				icon_url: _message.author.avatarURL
+			},
+			color: 0x00FF00
+		}, type, target);
 	};
 
-	this.error = function(message, target = null) {
-		const embed = new Discord.RichEmbed()
-		.setAuthor(_message.author.username, _message.author.avatarURL)
-		.setDescription(message)
-		.setColor(0xFF0000);
-
-		if (target != null)
-			global.client.channels.find('name', target).send({embed});
-		else
-			_message.channel.send({embed});
+	this.error = function(message, target = null, type = "reply") {
+		return this.format({
+			description: message,
+			author: {
+				name: _message.author.username,
+				icon_url: _message.author.avatarURL
+			},
+			color: 0xFF0000
+		}, type, target);
 	};
 
 	this.format = function(format, type = "send", target = null) {
@@ -80,6 +81,10 @@ var Msg = function () {
 			}
 		}
 
+		if (is_empty(format) ||
+			(target != null && !this.channel_exists(target)))
+			return false;
+
 		if (type == "send")
 			if (target != null)
 				global.client.channels.find('name', target).send({embed});
@@ -88,7 +93,17 @@ var Msg = function () {
 		else if (type == "reply")
 			_message.reply({embed});
 		else
+		{
 			console.log('Type de message invalide, choisissez entre "send" et "reply".');
+			return false;
+		}
+		return true;
+	};
+
+	var is_empty = function(obj) {
+		for (let key in obj)
+			return false;
+		return true;
 	};
 };
 
