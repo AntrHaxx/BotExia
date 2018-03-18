@@ -32,7 +32,7 @@ module.exports = {
 				&& instruction != 'execute')
 			this[instruction](message, args, client);
 		else
-			global.Msg.error('***'+instruction+'*** n\'est pas une instruction valide.');
+			Msg.error('***'+instruction+'*** n\'est pas une instruction valide.');
 	},
 
 	create: function(message, args, client) {
@@ -60,10 +60,10 @@ module.exports = {
 		}
 		var obj = require('../../json/votes.json');
 		if (obj[vote.name] != undefined)
-			return global.Msg.error('Un sondage avec ce nom existe deja');
+			return Msg.error('Un sondage avec ce nom existe deja');
 		obj[vote.name] = vote;
 		obj = JSON.stringify(obj);
-		global.Msg.valid('Vote cree avec succes');
+		Msg.success('Vote cree avec succes');
 		global.fs.writeFile('./json/votes.json', obj, 'utf8', function () {});
 	},
 
@@ -77,11 +77,11 @@ module.exports = {
 		let options = null;
 		args = args.slice(1);
 		if (is_empty(data))
-			return global.Msg.error('Aucun sondage cree a ce jour.');
+			return Msg.error('Aucun sondage cree a ce jour.');
 		else if (data[vote] != null && data[vote].owner != message.author.id)
-			return global.Msg.error('Vous ne disposez pas des permissions requises pour cette action.');
+			return Msg.error('Vous ne disposez pas des permissions requises pour cette action.');
 		else if (data[vote] == null)
-			return global.Msg.error('Sondage non trouve.');
+			return Msg.error('Sondage non trouve.');
 		for (value of args)
 		{
 			if (value == '' || value == '\n')
@@ -112,7 +112,7 @@ module.exports = {
 				j++;
 		}
 		data = JSON.stringify(data);
-		global.Msg.valid("Sondage mis a jour avec succes");
+		Msg.success("Sondage mis a jour avec succes");
 		global.fs.writeFile('./json/votes.json', data, 'utf8', function () {});
 	},
 
@@ -120,16 +120,16 @@ module.exports = {
 		args = args.join(' ');
 		var data = require('../../json/votes.json');
 		if (is_empty(data))
-			global.Msg.error('Aucun sondage cree a ce jour.');
+			Msg.error('Aucun sondage cree a ce jour.');
 		else if (data[args] != null && data[args].owner != message.author.id)
-			global.Msg.error('Vous ne disposez pas des permissions requises pour cette action.');
+			Msg.error('Vous ne disposez pas des permissions requises pour cette action.');
 		else if (data[args] == null)
-			global.Msg.error('Sondage non trouve.');
+			Msg.error('Sondage non trouve.');
 		else
 		{
 			delete data[args];
 			data = JSON.stringify(data);
-			global.Msg.valid('Vote efface avec succes');
+			Msg.success('Vote efface avec succes');
 			global.fs.writeFile('./json/votes.json', data, 'utf8', function () {});
 		}
 	},
@@ -138,14 +138,14 @@ module.exports = {
 		args = args.join(' ');
 		var data = require('../../json/votes.json');
 		if (is_empty(data))
-			global.Msg.error('Aucun sondage cree a ce jour.');
+			Msg.error('Aucun sondage cree a ce jour.');
 		else if (data[args] != null && data[args].owner != message.author.id)
-			global.Msg.error('Vous ne disposez pas des permissions requises pour cette action.');
+			Msg.error('Vous ne disposez pas des permissions requises pour cette action.');
 		else if (data[args] == null)
-			global.Msg.error('Sondage non trouve.');
+			Msg.error('Sondage non trouve.');
 		data[args].closed = 0;
 		data = JSON.stringify(data);
-		global.Msg.valid('Sondage ouvert au vote');
+		Msg.success('Sondage ouvert au vote');
 		global.fs.writeFile('./json/votes.json', data, 'utf8', function () {});
 	},
 
@@ -153,14 +153,14 @@ module.exports = {
 		args = args.join(' ');
 		var data = require('../../json/votes.json');
 		if (is_empty(data))
-			global.Msg.error('Aucun sondage cree a ce jour.');
+			Msg.error('Aucun sondage cree a ce jour.');
 		else if (data[args] != null && data[args].owner != message.author.id)
-			global.Msg.error('Vous ne disposez pas des permissions requises pour cette action.');
+			Msg.error('Vous ne disposez pas des permissions requises pour cette action.');
 		else if (data[args] == null)
-			global.Msg.error('Sondage non trouve.');
+			Msg.error('Sondage non trouve.');
 		data[args].closed = 1;
 		data = JSON.stringify(data);
-		global.Msg.valid('Sondage ferme au vote');
+		Msg.success('Sondage ferme au vote');
 		global.fs.writeFile('./json/votes.json', data, 'utf8', function () {});
 	},
 
@@ -176,7 +176,7 @@ module.exports = {
 				let date = new Date(data.date);
 				date = date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear()+' ('+date.getHours()+':'+date.getMinutes()+')';
 
-				global.Msg.format({
+				Msg.format({
 					title: data.name,
 					author: {name: user+" | "+date, avatar},
 					fields: [{name: "Vous avez vote pour l'option:", value: "**"+(index + 1)+")** "+data.options[index].label}],
@@ -184,10 +184,10 @@ module.exports = {
 				});
 			}
 			else
-				global.Msg.error('Vous n\'avez pas vote pour ce sondage');
+				Msg.error('Vous n\'avez pas vote pour ce sondage');
 		}
 		else
-			global.Msg.error('Sondage non trouve.');
+			Msg.error('Sondage non trouve.');
 	},
 
 	list: function(message, args = [], client) {
@@ -205,7 +205,7 @@ module.exports = {
 					if (args != '' && obj[args] != undefined)
 						return self.result(message, args.split(' '), client);
 					else if (args != '' && obj[args] == undefined)
-						return global.Msg.error('Sondage non trouve.');
+						return Msg.error('Sondage non trouve.');
 					for (key in obj)
 					{
 						let user = client.users.find('id', obj[key].owner).username;
@@ -213,7 +213,7 @@ module.exports = {
 						let date = new Date(obj[key].date);
 						date = date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear()+' ('+date.getHours()+':'+date.getMinutes()+')';
 
-						global.Msg.format({
+						Msg.format({
 							title: obj[key].name,
 							author: {name: user+" | "+date, icon_url: avatar},
 							color: obj[key].closed ? 0xFF0000 : 0x00FF00,
@@ -221,30 +221,30 @@ module.exports = {
 					}
 				}
 				else
-					global.Msg.error('Aucun sondage cree a ce jour.');
+					Msg.error('Aucun sondage cree a ce jour.');
 			}
 		});
 	},
 
 	choose: function(message, args, client) {
 		if (args.length < 2)
-			return global.Msg.error('Choisissez un vote et une option de reponse.');
+			return Msg.error('Choisissez un vote et une option de reponse.');
 		let data = require('../../json/votes.json');
 		let option = args[args.length - 1] - 1;
 		args = args.slice(0, args.length - 1).join(' ');
 		if (is_empty(data))
-			return global.Msg.error('Aucun sondage publie a ce jour.');			
+			return Msg.error('Aucun sondage publie a ce jour.');			
 		else if (data[args] == null)
-			return global.Msg.error('Le vote choisi est invalide');
+			return Msg.error('Le vote choisi est invalide');
 		else if (data[args].options[option] == undefined)
-			return global.Msg.error('L\'option choisie est invalide.');
+			return Msg.error('L\'option choisie est invalide.');
 		else if (data[args].closed)
-			return global.Msg.error('Ce sondage est ferme au vote');
+			return Msg.error('Ce sondage est ferme au vote');
 		else if (data[args].options[option].votes.includes(message.author.id))
 		{
 			let index = data[args].options[option].votes.indexOf(message.author.id);
 			data[args].options[option].votes.splice(index, 1);
-			global.Msg.send('Vous avez annule votre vote.');
+			Msg.info('Vous avez annule votre vote.');
 		}
 		else
 		{
@@ -252,14 +252,14 @@ module.exports = {
 			if (voted == -1)
 			{
 				data[args].options[option].votes.push(message.author.id);
-				global.Msg.valid('Vote enregistre');
+				Msg.success('Vote enregistre');
 			}
 			else
 			{
 				let index = data[args].options[voted].votes.indexOf(message.author.id);
 				data[args].options[voted].votes.splice(index, 1);
 				data[args].options[option].votes.push(message.author.id);
-				global.Msg.valid('Vote modifie');
+				Msg.success('Vote modifie');
 			}
 		}
 		data = JSON.stringify(data);
@@ -279,7 +279,7 @@ module.exports = {
 			for (let i = 0; i < data.options.length; i++)
 				fields.push({name: (i + 1)+") "+data.options[i].label, value: "**"+data.options[i].votes.length+"** voix"});
 
-			global.Msg.format({
+			Msg.format({
 				title: data.name,
 				author: {name: user+" | "+date, avatar},
 				description: data.description,
@@ -293,6 +293,6 @@ module.exports = {
 			});
 		}
 		else
-			global.Msg.error('Aucun vote ne correspond a votre recherche.');
+			Msg.error('Aucun vote ne correspond a votre recherche.');
 	}
 };

@@ -19,15 +19,15 @@ module.exports = {
 		    		str = str.replace(regex, accents[acc]);
 		    	}
 
-				const embed = new global.Discord.RichEmbed()
-				.setTitle("Quoi de neuf Chuck?")
-				.setAuthor("Chuck Norris Fact", "https://i.pinimg.com/originals/ed/ea/89/edea891d05f695a8bb235fe0057223b7.png")
-
-				.setColor(0xFF0000)
-				.setDescription(str)
-				.setThumbnail("https://vignette.wikia.nocookie.net/deathbattle/images/4/47/Chuck_norris_PNG18.png/revision/latest?cb=20170919105155");
-
-				message.channel.send({embed});
+				Msg.format({
+					color: 0xFF0000,
+					description: str,
+					thumbnail: "https://vignette.wikia.nocookie.net/deathbattle/images/4/47/Chuck_norris_PNG18.png/revision/latest?cb=20170919105155",
+					author : {
+						name: "Chuck Norris Fact",
+						icon_url: "https://i.pinimg.com/originals/ed/ea/89/edea891d05f695a8bb235fe0057223b7.png"
+					}
+				});
 		    }
 		});
 	}

@@ -1,37 +1,42 @@
 global.fs = require('fs');
 global.Discord = require('discord.js');
-global.client = new Discord.Client();
-global.config = require('./json/config.json');
+global.Client = new Discord.Client();
+global.Config = require('./json/config.json');
 global.Msg = require('./helpers/msg');
 const Command = require('./helpers/command');
 
-client.commands = Command.loadAll();
+Client.commands = Command.loadAll();
 
-client.on('ready', () => {
+Client.on('ready', () => {
 	console.log('Pret a servir !');
 });
 
-client.on('message', message => {
-    if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+Client.on('message', message => {
+    if (!message.content.startsWith(Config.prefix) || message.author.bot) return;
 
-	const args = message.content.slice(config.prefix.length).split(/ +/);
+	const args = message.content.slice(Config.prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
 	Msg.set(message);
 
 	try {
-		for (category in client.commands)
+		for (category in Client.commands)
 		{
-			command = client.commands[category].get(commandName);
+			command = Client.commands[category].get(commandName);
 			if (command != null)
 				break;
 		}
         //console.log(client.commands.list());
         if (command != null)
-            command.execute(message, args, client);
+        {
+        	if (command.type == undefined || command.type.includes(message.channel.type))
+            	command.execute(message, args, Client);
+            else
+            	Msg.error("Cette commande n'est pas permise dans ce type de channel.");
+		}
 	}
 	catch (error) {	
 		console.error(error);
     }
 });
 
-client.login(config.token);
+Client.login(Config.token);

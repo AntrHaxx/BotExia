@@ -3,7 +3,7 @@ module.exports = {
     description : "G FAIM",
     usage :"`*manger`",
     execute(message, args, client){
-        var other = global.client.channels.find('name', 'on-manj-ou');
+        var other = Client.channels.find('name', 'on-manj-ou');
         other.send('@everyone ON MANG OU ?');
 
         const commands = message.content.split(/ +/);
