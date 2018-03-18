@@ -86,7 +86,7 @@ module.exports.loadAll = function(data = [])
 
 module.exports.is_allowed = function (message, command)
 {
-	let all = false;
+	let all = true;
 	for (type in command.permissions)
 	{
 		let perm = command.permissions[type];
