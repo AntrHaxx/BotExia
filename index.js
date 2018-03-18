@@ -4,6 +4,7 @@ global.client = new Discord.Client();
 global.config = require('./json/config.json');
 global.Msg = require('./helpers/msg');
 const Command = require('./helpers/command');
+global.Command = Command;
 
 client.commands = Command.loadAll();
 
@@ -27,7 +28,10 @@ client.on('message', message => {
 		}
         //console.log(client.commands.list());
         if (command != null)
-            command.execute(message, args, client);
+            if (Command.is_allowed(message, command))
+                command.execute(message, args, client);
+            else
+                Msg.error("Vous n'etes pas autorise a utiliser cette commande.");
 	}
 	catch (error) {	
 		console.error(error);

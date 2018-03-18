@@ -1,8 +1,7 @@
 module.exports = {
 	name: "doc",
 	permissions: {
-		"dm": ["admin"],
-		"*": ["none"]
+		"dm": ["@everyone"]
 	},
 	execute: function(message, args, client) {
 		if (!args.length)

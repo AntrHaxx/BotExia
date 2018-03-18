@@ -71,6 +71,19 @@ module.exports.Category = function(category, name = null)
 	this.set();
 };
 
+module.exports.search = function (search)
+{
+	let command = null;
+    for (category in client.commands)
+    {
+        if (command == null)
+            command = client.commands[category].get(search);
+        else
+            break;
+    }
+    return command;
+};
+
 module.exports.loadAll = function(data = [])
 {
 	var categories = global.fs.readdirSync('./commands');
@@ -86,7 +99,7 @@ module.exports.loadAll = function(data = [])
 
 module.exports.is_allowed = function (message, command)
 {
-	let all = true;
+	let all = false;
 	for (type in command.permissions)
 	{
 		let perm = command.permissions[type];
@@ -98,7 +111,15 @@ module.exports.is_allowed = function (message, command)
 	return all;
 };
 
-module.exports.has_role = function(message, roles)
+module.exports.has_role = function(message, croles)
 {
-	return true;
+	let is = false;
+	let uroles = client.guilds.get(config.server_id).members.get(message.author.id).roles;
+	uroles.forEach(function(role, id) {
+		if (croles.includes(role.name))
+			is = true;
+		else if (croles.includes(role.name.toLowerCase()))
+			is = true;
+	});
+	return is;
 };
