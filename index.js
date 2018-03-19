@@ -1,10 +1,18 @@
 global.fs = require('fs');
 global.Discord = require('discord.js');
 global.client = new Discord.Client();
-global.config = require('./json/config.json');
 global.Msg = require('./helpers/msg');
+global.config;
+const colors = require('colors');
 const Command = require('./helpers/command');
 global.Command = Command;
+
+try {
+    config = require('./json/config.json');
+}
+catch (e) {
+    return console.log("  ".bgRed.underline.strikethrough+" Creez le fichier de configuration ".bgWhite.black.bold+" json/config.json ".bgWhite.black.bold.inverse);
+}
 
 client.commands = Command.loadAll();
 

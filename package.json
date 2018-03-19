@@ -10,6 +10,11 @@
   "license": "ISC",
   "keywords": [],
   "dependencies": {
+    "colors": "^1.2.1",
+    "discord.js": "^11.3.2",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "node-opus": "^0.2.7",
+    "opusscript": "0.0.6",
     "request": "^2.85.0"
   },
   "devDependencies": {},

@@ -27,7 +27,7 @@ var Msg = function () {
 		}, target, type);
 	};
 
-	this.success = function(messag, target = null, type = "reply") {
+	this.success = function(message, target = null, type = "reply") {
 		return this.format({
 			description: message,
 			author: {
