@@ -59,17 +59,17 @@ client.on('messageReactionAdd', (reaction, message, args, client) =>
         break;
         //Geant
         case '388631582124146689':
-            console.log("Vote pour aller chercher de la bouffe a Geant " +member.displayName);
+            console.log("Vote pour aller chercher de la bouffe a Geant ");
             results['geant']++;
         break;
         //Buger King 
         case '388631666605686784' :
-            console.log("Vote pour aller manger Au Burger King " +member.displayName);
+            console.log("Vote pour aller manger Au Burger King ");
             results['bk']++;
         break;
         //Enfer (RU)
         case '388631620002906112':
-            console.log("Vote pour aller manger en Enfer ", +member.displayName);
+            console.log("Vote pour aller manger en Enfer ");
 			results['enfer']++;
         break;    
 	}
@@ -87,27 +87,27 @@ client.on('messageReactionRemove', (reaction, member) =>
     {
     //McDo
     case '372677821543219210':
-        console.log("- 1 Vote pour aller manger a McDo " +member.displayName);
+        console.log("- 1 Vote pour aller manger a McDo ");
         results['mcdo']--;
     break;
     //Ange     
     case '388631405778698242':
-        console.log('-1 Vote pour aller manger a Ange ' +member.displayName);
+        console.log('-1 Vote pour aller manger a Ange ');
         results['ange']--;
     break;
     //Geant
     case '388631582124146689':
-        console.log("-1 Vote pour aller chercher de la bouffe a Geant " +member.displayName);
+        console.log("-1 Vote pour aller chercher de la bouffe a Geant ");
         results['geant']--;
     break;
     //Buger King 
     case '388631666605686784' :
-        console.log("-1 Vote pour aller manger Au Burger King " +member.displayName);
+        console.log("-1 Vote pour aller manger Au Burger King ");
         results['bk']--;
     break;
     //Enfer (RU)
     case '388631620002906112':
-        console.log("-1 Vote pour aller manger en Enfer ", +member.displayName);
+        console.log("-1 Vote pour aller manger en Enfer ");
 		results['enfer']--;
 	break;
 	}

@@ -3,6 +3,9 @@ module.exports = {
     description : "Permet de reset les votes pour manger ",
     usage : "`*reset <Lieux>`",
     alias: ["vm", "voteGraille"],
+    permissions: {
+        "*": "*"
+    },
     execute(message, args, client)
     {
         const commands = message.content.split(/ +/);

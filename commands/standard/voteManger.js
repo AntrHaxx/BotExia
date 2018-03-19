@@ -3,6 +3,9 @@ module.exports = {
     description : "Permet de voter pour manger ",
     usage : "`*voteManger <Lieux>`",
     alias: ["vm", "voteGraille"],
+    permissions: {
+        "*": "*"
+    },
     execute(message, args, client)
     {
         const commands = message.content.split(/ +/);
