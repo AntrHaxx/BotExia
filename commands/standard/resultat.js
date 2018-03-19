@@ -4,6 +4,9 @@ module.exports = {
     name : "resultat",
     description : "Affiche le resultat du vote pour manger \n Channel Disponible pour l'affichage : \n - Debug \n - On_Mang_Ou",
     usage : "`*resultat <channel>`",
+    permissions: {
+        "*": "*"
+    },
     execute(message, args)
     {
         const { bk, mcdo, ange, geant, enfer } = require('../../json/voteManger.json');
@@ -12,24 +15,104 @@ module.exports = {
         const resultat = commands[0];
         const info = args.length ? args.shift().toLowerCase() : null;
 
-        var other = Client.channels.find('name', 'on-manj-ou');
-        var debug = Client.channels.find('name', 'debug');
+        const embed = {
+            "title": "Resultat",
+            "color": 004346,
+            "description" :"Voici les resultat du vote",
+      
+            "footer": {
+              "text": "Exia.cesi | Promo St-Nazaire-2017"
+            },
+            "author": {
+              "name": "Bot Exia v2.0",
+              "icon_url" : "https://cdn.discordapp.com/attachments/400651374146355210/425232194773057536/color4.jpg"
+            },
+            "fields": [
+              {
+                "name" : "McDo",
+                "value" : "Nombre de vote pour McDo : " +mcdo
+              },
+              {
+                "name": "Bk",
+                "value" :  "Nombre de vote pour bk : "+bk
+              },
+              {
+                "name": "Ange",
+                "value" :  "Nombre de vote pour ange : "+ange
+              },
+              {
+                "name": "Geant",
+                "value" :  "Nombre de vote pour geant : "+bk
+              },
+              {
+                "name": "RU",
+                "value" :  "Nombre de vote pour le Ru : "+enfer
+              },
+              {
+                  "name": "FoodTruck",
+                  "value": "R.I.P à jamais dans nos coeurs"
+              }
+            ]
+          };
+
+        const embedManger = {
+            "title": "Resultat",
+            "color": 004346,
+            "description" :"@everyone Voici les resultat du vote",
+      
+            "footer": {
+              "text": "Exia.cesi | Promo St-Nazaire-2017"
+            },
+            "author": {
+              "name": "Bot Exia v2.0",
+              "icon_url" : "https://cdn.discordapp.com/attachments/400651374146355210/425232194773057536/color4.jpg"
+            },
+            "fields": [
+              {
+                "name" : "McDo",
+                "value" : "Nombre de vote pour McDo : " +mcdo
+              },
+              {
+                "name": "Bk",
+                "value" :  "Nombre de vote pour bk : "+bk
+              },
+              {
+                "name": "Ange",
+                "value" :  "Nombre de vote pour ange : "+ange
+              },
+              {
+                "name": "Geant",
+                "value" :  "Nombre de vote pour geant : "+bk
+              },
+              {
+                "name": "RU",
+                "value" :  "Nombre de vote pour le Ru : "+enfer
+              },
+              {
+                  "name": "FoodTruck",
+                  "value": "R.I.P à jamais dans nos coeurs"
+              }
+            ]
+          };
+
+        var other = client.channels.find('name', 'on-manj-ou');
+        var debug = client.channels.find('name', 'debug');
 
         if (!info.length) {
 			message.channel.send('N\'oulie pas de mettre le channel');
 		}
 		else {
                 if(info === 'debug'){ 
-                    debug.send("**Les resultats sont**:\n\n McDo : " +mcdo + " \n Ange : " +ange + "\n Géant : " +geant + "\n Bk : " +bk + "\n Enfer : " +enfer + "\n FoodTruck : R.I.P à jamais dans nos coeurs");
+                    debug.send({embed});
                 }
-                else if (info === 'OnMangOu'){
-                    other.send("@everyone \n \n **Les resultats sont**:\n\n McDo : " +mcdo + " \n Ange : " +ange + "\n Géant : " +geant + "\n Bk : " +bk + "\n Enfer : " +enfer + "\n FoodTruck : R.I.P à jamais dans nos coeurs");
+                else if (info === 'manger'){
+                    other.send({embedManger});
                 }
                 else if (info === 'console'){ 
                     console.log('McDo : ' +mcdo);
                 }
                 else {
-                    message.channel.send('Resultat : ' +args)
+                    message.channel.send({embed})
                 }
             }
         }

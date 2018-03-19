@@ -2,8 +2,11 @@ module.exports = {
     name : "manger",
     description : "G FAIM",
     usage :"`*manger`",
+    permissions: {
+        "*": "*"
+    },
     execute(message, args, client){
-        var other = Client.channels.find('name', 'on-manj-ou');
+        var other = client.channels.find('name', 'on-manj-ou');
         other.send('@everyone ON MANG OU ?');
 
         const commands = message.content.split(/ +/);
