@@ -106,7 +106,7 @@ module.exports = {
                     debug.send({embed});
                 }
                 else if (info === 'manger'){
-                    other.send({embedManger});
+                    other.send({embed});
                 }
                 else if (info === 'console'){ 
                     console.log('McDo : ' +mcdo);
