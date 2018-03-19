@@ -4,8 +4,7 @@ global.client = new Discord.Client();
 global.Msg = require('./helpers/msg');
 global.Log = require('./helpers/log');
 global.config;
-const Command = require('./helpers/command');
-global.Command = Command;
+global.Command = require('./helpers/command');
 
 try {
     config = require('./json/config.json');
@@ -14,7 +13,7 @@ catch (e) {
     return Log.error("Creez le fichier de configuration", "json/config.json");
 }
 
-client.commands = Command.loadAll();
+client.login(config.token);
 
 client.on('ready', () => {
     Log.success("Pret a servir !");
@@ -28,18 +27,8 @@ client.on('message', message => {
 	Msg.set(message);
 
 	try {
-		for (category in client.commands)
-		{
-			command = client.commands[category].get(commandName);
-			if (command != null)
-				break;
-		}
-        //console.log(client.commands.list());
-        if (command != null)
-            if (Command.is_allowed(message, command))
-                command.execute(message, args, client);
-            else
-                Msg.error("Vous n'etes pas autorise a utiliser cette commande.");
+        if (!Command.call(commandName, message, args))
+            Msg.error("Vous n'etes pas autorise a utiliser cette commande.");
 	}
 	catch (error) {	
 		Log.error(error, "index.js");
@@ -124,6 +113,3 @@ client.on('messageReactionRemove', (reaction, member) =>
 		Log.success('Vote enregistre');
 	});
 });
-
-
-client.login(config.token);

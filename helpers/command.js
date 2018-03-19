@@ -126,7 +126,7 @@ module.exports.has_role = function(message, croles)
 */
 var Command = function()
 {
-	var _commands;
+	var _commands = {};
 
 	/*
 	**	Has Role
@@ -183,6 +183,10 @@ var Command = function()
 	{
 		let command = this.get(search);
 		if (command == null)
+			return false;
+		if (typeof args == "string")
+			args = args.split(/ +/);
+		if (!this.is_allowed(message, command))
 			return false;
 		return command.execute(message, args, client);
 	    return false;
@@ -251,7 +255,7 @@ var Command = function()
 				list.push(command.name);
 			return list;
 		}
-		else if (let category == null)
+		else if (category == null)
 		{
 			let list = {};
 			for (category in _commands)
@@ -340,16 +344,16 @@ var Command = function()
 				{
 		    		let command = require('../commands/'+category+'/' +file);
 					try {
-						command.doc = require('../json/docs/commands/'+_category+'/' +file+'on');
+						command.doc = require('../json/docs/commands/'+category+'/' +file+'on');
 			    	}
 					catch (e) {
+						Log.error("Documentation non trouvee pour la commande "+command.name+' a l\'emplacement', 'json/docs/commands/'+category+'/' +file+'on');
 						command.doc = null;
 					}
 					_commands[category][command.name] = command;
 				}
 			}
 		}
-		return commands;
 	};
 
 	this.load();
