@@ -1,28 +1,31 @@
 module.exports = {
-    name : "voteManger",
-    description : "Permet de voter pour manger ",
-    usage : "`*voteManger <Lieux>`",
-    alias: ["vm", "voteGraille"],
+    name : "prosit",
+    description : "Permet de changer de prosit",
+    usage : "`*prosit <N°DuPrsoit>`",
+    alias: ["pr", "NumeroProsit"],
+    permissions: {
+        "*": "*"
+    },
     execute(message, args, client)
     {
         const commands = message.content.split(/ +/);
         const command = commands[0];
-        const manger = args.length ? args[0].toLowerCase() : null;
+        const num = args.length ? args[0].toLowerCase() : null;
 
         if (!args.length) {
 			message.channel.send('N\'oulie pas de mette le lieux');
 		}
 		else {
-            var results = require('../../json/voteManger.json');
-            if (results[manger] == undefined) {
-				return message.reply('**'+manger+'** n\'est pas un lieux valide ' +manger);
+            var numero = require('../../json/prosit.json');
+            if (isNaN(num)) {
+				return message.reply("Faut rentrer un numero gros");
 			}
             else{
                 var fs = require('fs');
-                results[manger]++;
-                results = JSON.stringify(results);
-                fs.writeFile('./json/voteManger.json', results, 'utf8', function readFileCallback(err, data){
-                    message.reply('Vote enregistre');
+                numero['pro'] = num;
+                numero = JSON.stringify(numero);
+                fs.writeFile('./json/prosit.json', numero, 'utf8', function readFileCallback(err, data){
+                    message.reply('On passe au prosit n°'+num);
                 });
                
             }

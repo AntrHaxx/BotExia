@@ -1,12 +1,15 @@
 exports = {
     name : "kifekoi",
     description : "Sa sert pus a rien",
-    usage : "`*kifekoi`",
+	usage : "`*kifekoi`",
+	alias : ["role" ],
     execute(message){
 
-        const { prosit, un, deux, trois, quatres, cinq, six, sept, huit, neuf, dix, onze, douze, animateur, secretaire, scribe, inutile } = require("./json/pr.json");
-        const { pro } = require("./json/prosit.json")
-        
+        const { prosit, un, deux, trois, quatres, cinq, six, sept, huit, neuf, dix, onze, douze, animateur, secretaire, scribe, inutile } = require("../../json/pr.json");
+        const { pro } = require("../../json/prosit.json")
+		
+		message.channel.send(""+pro);
+
         function changement()
 {
     switch(pro%12)
@@ -133,8 +136,5 @@ exports = {
 
           changement();
           message.channel.send({embed})
-
-
-
     },
 }
