@@ -17,7 +17,7 @@ catch (e) {
 client.commands = Command.loadAll();
 
 client.on('ready', () => {
-    Log.info("Pret a servir !");
+    Log.success("Pret a servir !");
 });
 
 client.on('message', message => {
