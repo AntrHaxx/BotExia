@@ -3,6 +3,9 @@ module.exports = {
 	permissions: {
 		"*": "*"
 	},
+	permissions: {
+		"*": "*"
+	},
 	execute(message, args, client){
 		Msg.error("Ta mere!");
 	}

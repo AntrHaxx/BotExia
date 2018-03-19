@@ -15,10 +15,6 @@ catch (e) {
 
 client.login(config.token);
 
-client.on('ready', () => {
-    Log.success("Pret a servir !");
-});
-
 client.on('message', message => {
     if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
@@ -31,7 +27,7 @@ client.on('message', message => {
             Msg.error("Vous n'etes pas autorise a utiliser cette commande.");
 	}
 	catch (error) {	
-		Log.error(error, "index.js");
+		Log.error(error, "index.js:onMessage");
     }
 });
 
@@ -112,4 +108,24 @@ client.on('messageReactionRemove', (reaction, member) =>
 	fs.writeFile('./json/voteManger.json', results, 'utf8', function readFileCallback(err, data){
 		Log.success('Vote enregistre');
 	});
+});
+
+client.on('ready', () => {
+    Log.success("Pret a servir !", client.readyAt);
+});
+
+client.on('warn', () => {
+    Log.warning("Reconnection en cours");
+});
+
+client.on('error', () => {
+    Log.error("Reconnection en cours");
+});
+
+client.on('reconnecting', () => {
+    Log.info("Reconnection en cours");
+});
+
+client.on('disconnect', () => {
+    Log.info("Ca a coupe !");
 });

@@ -164,7 +164,7 @@ var Command = function()
 	        for (command in _commands[category])
 	        {
 	        	let command = _commands[category][command]
-	        	if (result == null && (command.name == search) ||
+	        	if (command.name == search ||
 	        		(command.alias != undefined && command.alias.includes(search)))
 	        		return true;
 	        }
@@ -184,12 +184,10 @@ var Command = function()
 		let command = this.get(search);
 		if (command == null)
 			return false;
-		if (typeof args == "string")
-			args = args.split(/ +/);
 		if (!this.is_allowed(message, command))
 			return false;
-		return command.execute(message, args, client);
-	    return false;
+		command.execute(message, args, client);
+		return true;
 	};
 
 	/*
@@ -202,15 +200,16 @@ var Command = function()
 	*/
 	this.get = function (search)
 	{
+
 	    for (category in _commands)
 	    {
 	        for (command in _commands[category])
 	        {
-	        	let command = _commands[category][command]
-	        	if (result == null && (command.name == search) ||
+	        	command = _commands[category][command];
+	        	if (command.name == search ||
 	        		(command.alias != undefined && command.alias.includes(search)))
 	        	{
-	        		return _commands[category][command];
+	        		return command;
 	        	}
 	        }
 	    }
@@ -252,7 +251,7 @@ var Command = function()
 		{
 			let list = [];
 			for (let command in _commands[category])
-				list.push(command.name);
+				list.push(command);
 			return list;
 		}
 		else if (category == null)
@@ -268,6 +267,8 @@ var Command = function()
 			}
 			return list;
 		}
+		if (category != null && _commands[category] == undefined)
+			Log.error("La categorie \""+category+"\" n'existe pas", "helpers/command.js:this.list()");
 		return null;
 	};
 
