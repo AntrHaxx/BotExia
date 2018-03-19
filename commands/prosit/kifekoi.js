@@ -32,6 +32,7 @@ module.exports = {
 				sec = un.secretaire;
 				scr = un.scribe;
 				inu = un.inutile;
+				console.log("Salut on est au prosit : " +temp%12);
 			break;
         //Prosit 2
 			case 2 :
@@ -39,6 +40,7 @@ module.exports = {
 				sec = deux.secretaire;
 				scr = deux.scribe;
 				inu = deux.inutile;
+				console.log("Salut on est au prosit : " +temp%12);
 			break;
         //Prosit 3
 			case 3 :
@@ -46,6 +48,7 @@ module.exports = {
 			sec = trois.secretaire;
 			scr = trois.scribe;
 			inu = trois.inutile;
+			console.log("Salut on est au prosit : " +temp%12);
 			break;
         //prosit 4
 			case 4 :
@@ -53,6 +56,7 @@ module.exports = {
 			sec = quatres.secretaire;
 			scr = quatres.scribe;
 			inu = quatres.inutile;
+			console.log("Salut on est au prosit : " +temp%12);
 			break;
         //Prosit 5
 			case 5 :
@@ -60,6 +64,7 @@ module.exports = {
 			sec = cinq.secretaire;
 			scr = cinq.scribe;
 			inu = cinq.inutile;
+			console.log("Salut on est au prosit : " +temp%12);
 			break;
         //Prosit 6 
 			case 6 :
@@ -67,6 +72,7 @@ module.exports = {
 			sec = six.secretaire;
 			scr = six.scribe;
 			inu = six.inutile;
+			console.log("Salut on est au prosit : " +temp%12);
 			break;
 		//prosit 7 	
 			case 7 :
@@ -74,6 +80,7 @@ module.exports = {
 			sec = sept.secretaire;
 			scr = sept.scribe;
 			inu = sept.inutile;
+			console.log("Salut on est au prosit : " +temp%12);
 			break;
 		//Prosit 8 	
 			case 8 :
@@ -81,6 +88,7 @@ module.exports = {
 			sec = huit.secretaire;
 			scr = huit.scribe;
 			inu = huit.inutile;
+			console.log("Salut on est au prosit : " +temp%12);
 			break;
         //Prosit 9
 			case 9 :
@@ -88,6 +96,7 @@ module.exports = {
 			sec = neuf.secretaire;
 			scr = neuf.scribe;
 			inu = neuf.inutile;
+			console.log("Salut on est au prosit : " +temp%12);
 			break;
 		//Prosit 10	
 			case 10 :
@@ -95,6 +104,7 @@ module.exports = {
 			sec = dix.secretaire;
 			scr = dix.scribe;
 			inu = dix.inutile;
+			console.log("Salut on est au prosit : " +temp%12);
 			break;
 		//Prosit 11
 			case 11 :
@@ -102,6 +112,7 @@ module.exports = {
 			sec = onze.secretaire;
 			scr = onze.scribe;
 			inu = onze.inutile;
+			console.log("Salut on est au prosit : " +temp%12);
 			break;
         //Prosit 12 
 			case 12 :
@@ -109,6 +120,7 @@ module.exports = {
 			sec = douze.secretaire;
 			scr = douze.scribe;
 			inu = douze.inutile;
+			console.log("Salut on est au prosit : " +temp%12);
 			break;
 			default : 
 			console.log("pr : " +pro);
@@ -138,7 +150,7 @@ module.exports = {
 			},
 			{
 				"name" : "Scribe",
-				"value" : "Aller hop hop hop on sort word et on prend en note " +scr +"\nPS : tu as la commande `*template` y'a plus qu'a remplir"
+				"value" : "Aller hop hop hop on sort word et on prend en note " +scr +"\nPS : tu as la commande `*template` y'a plus qu'a remplir !"
 			},
 			{
 				"name" : "Gestionaire",
@@ -149,7 +161,7 @@ module.exports = {
 
   changement();
 	prositAller.send({embed})
-	message.reply("SALUT "+onze.animateur);
+	message.reply("SALUT "+un.animateur);
 	message.reply("Pro " +(temp%12));
   },
 }
