@@ -2,8 +2,8 @@ global.fs = require('fs');
 global.Discord = require('discord.js');
 global.client = new Discord.Client();
 global.Msg = require('./helpers/msg');
+global.Log = require('./helpers/log');
 global.config;
-const colors = require('colors');
 const Command = require('./helpers/command');
 global.Command = Command;
 
@@ -11,13 +11,13 @@ try {
     config = require('./json/config.json');
 }
 catch (e) {
-    return console.log("  ".bgRed.underline.strikethrough+" Creez le fichier de configuration ".bgWhite.black.bold+" json/config.json ".bgWhite.black.bold.inverse);
+    return Log.error("Creez le fichier de configuration", "json/config.json");
 }
 
 client.commands = Command.loadAll();
 
 client.on('ready', () => {
-	console.log('Pret a servir !');
+    Log.info("Pret a servir !");
 });
 
 client.on('message', message => {
