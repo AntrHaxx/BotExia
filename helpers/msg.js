@@ -1,11 +1,19 @@
-var Msg = function () {
+var Msg = function ()
+{
 	var _message;
+
 	var _colors = {
 		default: 0xCCCCCC,
 		info: 0x33CCFF,
 		success: 0x00FF00,
 		warning: 0xFF6600,
 		error: 0XFF0000
+	};
+
+	var _is_empty = function(obj) {
+		for (key in obj)
+			return false;
+		return true;
 	};
 
 	this.set = function (message) {
@@ -108,7 +116,7 @@ var Msg = function () {
 			}
 		}
 
-		if (is_empty(format) ||
+		if (_is_empty(format) ||
 			(target != null && !this.channel_exists(target)))
 		{
 			console.log("Channel "+target+" invalide");
@@ -127,12 +135,6 @@ var Msg = function () {
 			console.log('Type de message invalide, choisissez entre "send" et "reply".');
 			return false;
 		}
-		return true;
-	};
-
-	var is_empty = function(obj) {
-		for (key in obj)
-			return false;
 		return true;
 	};
 };

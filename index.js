@@ -42,7 +42,7 @@ client.on('message', message => {
                 Msg.error("Vous n'etes pas autorise a utiliser cette commande.");
 	}
 	catch (error) {	
-		console.error(error);
+		Log.error(error, "index.js");
     }
 });
 
@@ -57,33 +57,33 @@ client.on('messageReactionAdd', (reaction, message, args, client) =>
     {
     	//McDo
     	case '372677821543219210':
-        	console.log("Vote pour aller manger a McDo ");
+        	Log.info("Vote pour aller manger a McDo ");
         	results['mcdo']++;
     	break;
         //Ange     
         case '388631405778698242':
-        	console.log('Vote pour aller manger a Ange ');
+        	Log.info('Vote pour aller manger a Ange ');
         	results['ange']++;
         break;
         //Geant
         case '388631582124146689':
-            console.log("Vote pour aller chercher de la bouffe a Geant ");
+            Log.info("Vote pour aller chercher de la bouffe a Geant ");
             results['geant']++;
         break;
         //Buger King 
         case '388631666605686784' :
-            console.log("Vote pour aller manger Au Burger King ");
+            Log.info("Vote pour aller manger Au Burger King ");
             results['bk']++;
         break;
         //Enfer (RU)
         case '388631620002906112':
-            console.log("Vote pour aller manger en Enfer ");
+            Log.info("Vote pour aller manger en Enfer ");
 			results['enfer']++;
         break;    
 	}
 	results = JSON.stringify(results);
 	fs.writeFile('./json/voteManger.json', results, 'utf8', function readFileCallback(err, data){
-	console.log("Vote ecris dans voteManger.json");
+	Log.success("Vote ecris dans voteManger.json");
 	});
 });
 
@@ -95,33 +95,33 @@ client.on('messageReactionRemove', (reaction, member) =>
     {
     //McDo
     case '372677821543219210':
-        console.log("- 1 Vote pour aller manger a McDo ");
+        Log.info("- 1 Vote pour aller manger a McDo ");
         results['mcdo']--;
     break;
     //Ange     
     case '388631405778698242':
-        console.log('-1 Vote pour aller manger a Ange ');
+        Log.info('-1 Vote pour aller manger a Ange ');
         results['ange']--;
     break;
     //Geant
     case '388631582124146689':
-        console.log("-1 Vote pour aller chercher de la bouffe a Geant ");
+        Log.info("-1 Vote pour aller chercher de la bouffe a Geant ");
         results['geant']--;
     break;
     //Buger King 
     case '388631666605686784' :
-        console.log("-1 Vote pour aller manger Au Burger King ");
+        Log.info("-1 Vote pour aller manger Au Burger King ");
         results['bk']--;
     break;
     //Enfer (RU)
     case '388631620002906112':
-        console.log("-1 Vote pour aller manger en Enfer ");
+        Log.info("-1 Vote pour aller manger en Enfer ");
 		results['enfer']--;
 	break;
 	}
 	results = JSON.stringify(results);
 	fs.writeFile('./json/voteManger.json', results, 'utf8', function readFileCallback(err, data){
-		console.log('Vote enregistre');
+		Log.success('Vote enregistre');
 	});
 });
 
