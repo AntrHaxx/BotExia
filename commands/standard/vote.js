@@ -24,6 +24,9 @@ var find = function(message, args = [], client) {
 
 module.exports = {
 	name : 'vote',
+	permissions: {
+		"*": "*"
+	},
 	execute(message, args, client){
 		const instruction = args[0];
 		args = args.slice(1);

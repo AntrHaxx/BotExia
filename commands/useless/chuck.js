@@ -1,5 +1,8 @@
 module.exports = {
 	name : 'chuck',
+	permissions: {
+		"*": "*"
+	},
 	execute(message, args, client){
     	const accents = require('../../json/accents.json');
 		const request = require('request');

@@ -17,8 +17,8 @@ module.exports = {
         if (pr[pro] != undefined)
                 prosit = pr[pro];
 
-        const embed = {
-            "title": "Kifekoi",
+        const role = {
+            "title": "Role",
 			"color": 34074, 
 	 
 			"footer": {
@@ -32,34 +32,20 @@ module.exports = {
 				{
 					"name" : "Animateur",
 					"value" : "Ce coup ci l'animateur c'est : " +prosit.animateur
-				},
-				{
-					"name": "Secretaire",
-					"value" :  "Bon aller go au tableau " +prosit.secretaire
-				},
-				{
-					"name" : "Scribe",
-					"value" : "Aller hop hop hop on sort word et on prend en note " +prosit.scribe +"\nPS : tu as la commande `*template` y'a plus qu'a remplir !"
-				},
-				{
-					"name" : "Gestionaire",
-					"value" : "Et ce coup là c'est à ton tour de te tourner les pouces : " +prosit.inutile
                 }
             ]}
-        
-        
-
+    
         if (rle === "gestionaire"){
             channelRole.send({embed})
         }
         else if(rle === "animateur"){
-            channelRole.send({anim})
+            channelRole.send({role})
         }
         else if(rle === "scribe"){
-            channelRole.send({scrb})
+            channelRole.send({embed})
         }
         else if(rle === "secretaire"){
-            channelRole.send({scrc})
+            channelRole.send({embed})
         }
         else{
             message.reply("Bro jsais pas ce qui marche pas la")

@@ -14,6 +14,7 @@
     "discord.js": "^11.3.2",
     "ffmpeg-binaries": "^3.2.2-3",
     "node-opus": "^0.2.7",
+    "nodemon": "^1.17.2",
     "opusscript": "0.0.6",
     "request": "^2.85.0"
   },
