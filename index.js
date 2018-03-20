@@ -9,10 +9,12 @@ catch (e) {
 global.fs = require('fs');
 global.Discord = require('discord.js');
 global.client = new Discord.Client();
-global.Lng = require('./helpers/lng');
-global.Msg = require('./helpers/msg');
-global.Log = require('./helpers/log');
-global.Command = require('./helpers/command');
+global.Load = require("./modules/load");
+global.Lng = Load.module("lng");
+global.Log = Load.module("log");
+global.Msg = Load.module("msg");
+global.Log = Load.module("log");
+global.Command = Load.module("command");
 
 client.on('message', message => {
     if (!message.content.startsWith(config.prefix) || message.author.bot) return;

@@ -4,7 +4,7 @@ module.exports = {
 		"*": "*"
 	},
 	execute(message, args, client){
-    	const accents = require('../../json/accents.json');
+    	const accents = Load.json('accents');
 		const request = require('request');
 
 		var url = 'https://www.chucknorrisfacts.fr/api/get?data=tri:alea;nb:1';

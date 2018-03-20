@@ -16,7 +16,7 @@ function is_empty(obj) {
 
 var find = function(message, args = [], client) {
 	args = args.join(' ');
-	var data = require('../../json/votes.json');
+	var data = Load.json('votes');
 	if (data[args] != undefined)
 		return data[args];
 	return null;

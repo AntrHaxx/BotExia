@@ -8,8 +8,8 @@ module.exports = {
 	},
 	execute(message){
 
-		const pr = require("../../json/pr.json");
-		const { pro } = require("../../json/prosit.json")
+		const pr = Load.json("pr");
+		const { pro } = Load.json("prosit")
 		var prosit = null;
 
 		Msg.info(pro);
