@@ -1,9 +1,10 @@
+global.config;
+global.message;
 global.fs = require('fs');
 global.Discord = require('discord.js');
 global.client = new Discord.Client();
 global.Msg = require('./helpers/msg');
 global.Log = require('./helpers/log');
-global.config;
 global.Command = require('./helpers/command');
 
 try {
@@ -13,17 +14,15 @@ catch (e) {
     return Log.error("Creez le fichier de configuration", "json/config.json");
 }
 
-client.login(config.token);
-
 client.on('message', message => {
     if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
+    global.message = message;
 	const args = message.content.slice(config.prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
-	Msg.set(message);
 
 	try {
-        if (!Command.call(commandName, message, args))
+        if (!Command.call(commandName, args))
             Msg.error("Vous n'etes pas autorise a utiliser cette commande.");
 	}
 	catch (error) {	
@@ -129,3 +128,5 @@ client.on('reconnecting', () => {
 client.on('disconnect', () => {
     Log.info("Ca a coupe !");
 });
+
+client.login(config.token);

@@ -1,129 +1,3 @@
-/*module.exports.Category = function(category, name = null)
-{
-	var _category = category;
-
-	this.name = name == null ? category : name;
-
-	var _commands = null;
-
-	var _commands_names = [];
-
-	this.from_name = function(name)
-	{
-		if (_commands.has(name))
-			return _commands.get(name);
-		return null;
-	}
-
-	this.from_alias = function(name)
-	{
-		let data = null;
-		_commands.forEach(function(value, key, collection){
-			if (value.alias != undefined && value.alias.includes(name))
-				data = value;
-		});
-		return data;
-	}
-
-	this.get = function(name)
-	{
-		let data = this.from_name(name);
-		if (data == null)
-			data = this.from_alias(name);
-		return data;
-	};
-
-	this.list = function(full = false)
-	{
-		if (full)
-			return _commands;
-		else
-			return _commands_names;
-	};
-
-	this.set = function(category = null)
-	{
-		if (category != null)
-			_category = category;
-		if (_category == null || !global.fs.existsSync('./commands/'+_category))
-			return 0;
-
-		const files = fs.readdirSync('./commands/'+_category);
-		_commands = new global.Discord.Collection();
-
-		for (const file of files) {
-			if (fs.lstatSync('./commands/'+_category+'/' +file).isFile())
-			{
-		    	let command = require('../commands/'+_category+'/' +file);
-		    	try {
-					command.doc = require('../json/docs/commands/'+_category+'/' +file+'on');
-		    	}
-				catch (e) {
-					command.doc = null;
-				}
-		    	_commands.set(command.name, command);
-		    	_commands_names.push(command.name);
-			}
-		}
-		return 0;
-	};
-
-	this.set();
-};
-
-module.exports.search = function (search)
-{
-	let command = null;
-    for (category in client.commands)
-    {
-        if (command == null)
-            command = client.commands[category].get(search);
-        else
-            break;
-    }
-    return command;
-};
-
-module.exports.loadAll = function(data = [])
-{
-	var categories = global.fs.readdirSync('./commands');
-	var commands = {};
-	for (cat of categories)
-	{
-		const files = fs.readdirSync('./commands/'+cat);
-		if (files.length && (!data.length || data.contains(cat)))
-			commands[cat] = new module.exports.Category(cat);
-	}
-	return commands;
-};
-
-module.exports.is_allowed = function (message, command)
-{
-	let all = false;
-	for (type in command.permissions)
-	{
-		let perm = command.permissions[type];
-		if (type == message.channel.type)
-			return (perm == "*" || module.exports.has_role(message, perm)) ? true : false;
-		else if (type == "*" && (perm == "*" || module.exports.has_role(message, perm)))
-			all = true;
-	}
-	return all;
-};
-
-module.exports.has_role = function(message, croles)
-{
-	let is = false;
-	let uroles = client.guilds.get(config.server_id).members.get(message.author.id).roles;
-	uroles.forEach(function(role, id) {
-		if (croles.includes(role.name))
-			is = true;
-		else if (croles.includes(role.name.toLowerCase()))
-			is = true;
-	});
-	return is;
-};
-*/
 var Command = function()
 {
 	var _commands = {};
@@ -137,7 +11,7 @@ var Command = function()
 	**	@return 		[bool]	TRUE si l'utilisateur dispose de droits
 	**								sur la commande, sinon FALSE
 	*/
-	var _has_ro;has_role = function(message, croles)
+	var _has_role = function(croles)
 	{
 		let is = false;
 		let uroles = client.guilds.get(config.server_id).members.get(message.author.id).roles;
@@ -179,13 +53,15 @@ var Command = function()
 	**	@param	search	[str]	Commande a chercher
 	**	@return 		[bool]	Etat de la commande
 	*/
-	this.call = function (search, message = null, args = null)
+	this.call = function (search, args = null)
 	{
 		let command = this.get(search);
 		if (command == null)
 			return false;
-		if (!this.is_allowed(message, command))
+		if (!this.is_allowed(command))
 			return false;
+		if (typeof args == "string")
+			args = args.split(/ +/);
 		command.execute(message, args, client);
 		return true;
 	};
@@ -267,8 +143,6 @@ var Command = function()
 			}
 			return list;
 		}
-		if (category != null && _commands[category] == undefined)
-			Log.error("La categorie \""+category+"\" n'existe pas", "helpers/command.js:this.list()");
 		return null;
 	};
 
@@ -306,7 +180,7 @@ var Command = function()
 	**							Un objet contenant une commande
 	**	@return [bool]
 	*/
-	this.is_allowed = function (message, command)
+	this.is_allowed = function (command)
 	{
 		if (typeof command == "string")
 			command = this.get(command);

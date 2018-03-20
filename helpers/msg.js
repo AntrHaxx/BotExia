@@ -1,7 +1,6 @@
 var Msg = function ()
 {
-	var _message;
-
+	// Couleurs par defaut.
 	var _colors = {
 		default: 0xCCCCCC,
 		info: 0x33CCFF,
@@ -10,64 +9,119 @@ var Msg = function ()
 		error: 0XFF0000
 	};
 
+	/*
+	**	Is Empty
+	**	Verifie si un objet est vide
+	**
+	**	@param	obj [obj]	Objet a tester
+	**	@return 	[bool]	TRUE si l'objet est vide, sinon FALSE
+	*/
 	var _is_empty = function(obj) {
 		for (key in obj)
 			return false;
 		return true;
 	};
 
-	this.set = function (message) {
-		_message = message;
-	};
-
+	/*
+	**	Channel Exists
+	**	Verifie si un channel existe
+	**
+	**	@param	channel [str]	Nom du channel a chercher
+	**	@return 		[bool]	TRUE si le channel existe, sinon FALSE
+	*/
 	this.channel_exists = function(channel) {
-		return Client.channels.find('name', channel) != null;
+		return client.channels.find('name', channel) != null;
 	}
 
+	/*
+	**	Info
+	**	Affiche un message sur Discord avec le preformatage INFO
+	**
+	**	@param	message 	[str]	Message a afficher sur Discord
+	**	@param	target		[str]	Si defini, channel de destination
+	**	@param	type 		[str]	Type de message (send/reply)
+	**	@return 			[bool]	TRUE si message bien envoye, sinon FALSE
+	*/
 	this.info = function(message, target = null, type = "send") {
 		return this.format({
 			description: message,
 			author: {
-				name: _message.author.username,
-				icon_url: _message.author.avatarURL
+				name: global.message.author.username,
+				icon_url: global.message.author.avatarURL
 			},
 			color: _colors.info
 		}, target, type);
 	};
 
+	/*
+	**	Success
+	**	Affiche un message sur Discord avec le preformatage SUCCESS
+	**
+	**	@param	message 	[str]	Message a afficher sur Discord
+	**	@param	target		[str]	Si defini, channel de destination
+	**	@param	type 		[str]	Type de message (send/reply)
+	**	@return 			[bool]	TRUE si message bien envoye, sinon FALSE
+	*/
 	this.success = function(message, target = null, type = "reply") {
 		return this.format({
 			description: message,
 			author: {
-				name: _message.author.username,
-				icon_url: _message.author.avatarURL
+				name: global.message.author.username,
+				icon_url: global.message.author.avatarURL
 			},
 			color: _colors.success
 		}, target, type);
 	};
 
+	/*
+	**	Warning
+	**	Affiche un message sur Discord avec le preformatage WARNING
+	**
+	**	@param	message 	[str]	Message a afficher sur Discord
+	**	@param	target		[str]	Si defini, channel de destination
+	**	@param	type 		[str]	Type de message (send/reply)
+	**	@return 			[bool]	TRUE si message bien envoye, sinon FALSE
+	*/
 	this.warning = function(message, target = null, type = "reply") {
 		return this.format({
 			description: message,
 			author: {
-				name: _message.author.username,
-				icon_url: _message.author.avatarURL
+				name: global.message.author.username,
+				icon_url: global.message.author.avatarURL
 			},
 			color: _colors.warning
 		}, target, type);
 	};
 
+	/*
+	**	Error
+	**	Affiche un message sur Discord avec le preformatage ERROR
+	**
+	**	@param	message 	[str]	Message a afficher sur Discord
+	**	@param	target		[str]	Si defini, channel de destination
+	**	@param	type 		[str]	Type de message (send/reply)
+	**	@return 			[bool]	TRUE si message bien envoye, sinon FALSE
+	*/
 	this.error = function(message, target = null, type = "reply") {
 		return this.format({
 			description: message,
 			author: {
-				name: _message.author.username,
-				icon_url: _message.author.avatarURL
+				name: global.message.author.username,
+				icon_url: global.message.author.avatarURL
 			},
 			color: _colors.error
 		}, target, type);
 	};
 
+	/*
+	**	Format
+	**	Affiche un message enrichi sur Discord
+	**
+	**	@param	format 	[onj]	Objet avec le contenu a afficher sur Discord
+	**	@param	target	[str]	Si defini, channel de destination
+	**	@param	type 	[str]	Type de message (send/reply)
+	**	@return 		[bool]	TRUE si message bien envoye, sinon FALSE
+	*/
 	this.format = function(format, target = null, type = "send") {
 		const embed = new Discord.RichEmbed();
 		if (format.embed != undefined)
@@ -119,20 +173,20 @@ var Msg = function ()
 		if (_is_empty(format) ||
 			(target != null && !this.channel_exists(target)))
 		{
-			console.log("Channel "+target+" invalide");
+			Log.error("Channel "+target+" invalide");
 			return false;
 		}
 
 		if (type == "send")
 			if (target != null)
-				Client.channels.find('name', target).send({embed});
+				client.channels.find('name', target).send({embed});
 			else
-				_message.channel.send({embed});
+				global.message.channel.send({embed});
 		else if (type == "reply")
-			_message.reply({embed});
+			global.message.reply({embed});
 		else
 		{
-			console.log('Type de message invalide, choisissez entre "send" et "reply".');
+			Log.error('Type de message invalide, choisissez entre "send" et "reply".');
 			return false;
 		}
 		return true;
