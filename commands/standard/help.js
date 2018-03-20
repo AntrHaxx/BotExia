@@ -6,7 +6,7 @@ module.exports = {
     execute(message, args, client){
         if (!args.length) {
             // Recuperer la liste des commandes
-            let data = this.get_commands_list(client.commands);
+            let data = this.get_commands_list();
             // Afficher la liste des commandes
             let fields = [];
             for (category in data)
@@ -24,14 +24,7 @@ module.exports = {
         }
         else {
             // Recherche de la commande
-            let command = null;
-            for (category in client.commands)
-            {
-                if (command == null)
-                    command = client.commands[category].get(args[0]);
-                else
-                    break;
-            }
+            let command = Command.get(args[0]);
             // Si commande non trouvee afficher une erreur
             if (command == null)
                 return Msg.error('La commande **'+args[0]+'** n\'est pas une commande valide.\nTapez **'+Config.prefix+'help** pour avoir la liste des commandes');
@@ -62,14 +55,17 @@ module.exports = {
             Msg.format(msg);
         }
     },
-    get_commands_list : function(categories) {
+    get_commands_list : function() {
         let data = {};
+        let categories = Command.list();
         for (category in categories)
         {
             data[category] = {name: category, commands: []};
-            categories[category].list(true).forEach(function (value, key, map){
+            for (command in categories[category])
+            {
+                let value = categories[category][command];
                 data[category].commands.push('- '+value.name+(value.alias != undefined ? ' [#'+value.alias.join(', #')+']' : ''));
-            });
+            }
             data[category].commands = data[category].commands.join(' \n ');
         }
         return data;

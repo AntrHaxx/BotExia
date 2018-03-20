@@ -16,7 +16,8 @@
     "node-opus": "^0.2.7",
     "nodemon": "^1.17.2",
     "opusscript": "0.0.6",
-    "request": "^2.85.0"
+    "request": "^2.85.0",
+    "sqlite3": "^4.0.0"
   },
   "devDependencies": {},
   "repository": {

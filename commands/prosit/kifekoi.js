@@ -12,8 +12,14 @@ module.exports = {
 		
 			var prositAller = client.channels.find("name", "role");
 
+<<<<<<< HEAD
 			if (pr[pro] != undefined)
 				prosit = pr[pro];
+=======
+		const pr = Load.json("pr");
+		const { pro } = Load.json("prosit")
+		var prosit = null;
+>>>>>>> 73f1709f4878adf226711b9ef6d21f6f29e05b81
 
   		const embed = {
 			"title": "Kifekoi",
