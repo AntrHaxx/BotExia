@@ -13,7 +13,6 @@ global.Load = require("./modules/load");
 global.Lng = Load.module("lng");
 global.Log = Load.module("log");
 global.Msg = Load.module("msg");
-global.Log = Load.module("log");
 global.Command = Load.module("command");
 
 client.on('message', message => {

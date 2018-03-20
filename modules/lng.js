@@ -89,28 +89,16 @@ var Lng = function()
 	*/
 	this.load = function(lng = null)
 	{
-		folders = fs.readdirSync('./json/languages/');
-		for (folder of folders)
+		let data = Load.language(lng);
+		if (data != null)
 		{
-			if (lng != undefined && lng != null && lng != folder)
-				continue;
-			try {
-				var files = fs.readdirSync('./json/languages/'+folder+"/");
-			} catch (e) {
-				Log.error("Impossible de charger la langue "+lng, e);
-				return false;
-			}
-			_entries[folder] = {};
-			for (file in files)
-			{
-				let json = require("../json/languages/"+folder+"/"+files[file]);
-				for (entry in json)
-				{
-					_entries[folder][entry] = json[entry];
-				}
-			}
+			if (lng == null)
+				_entries = data;
+			else
+				_entries[lng] = data;
+			return true;
 		}
-		return true;
+		return false;
 	};
 
 	this.load();

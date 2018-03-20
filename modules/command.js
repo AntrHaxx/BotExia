@@ -211,25 +211,19 @@ var Command = function()
 	*/
 	this.load = function()
 	{
-		let categories = fs.readdirSync('./commands');
+		let categories = Load.root('commands');
 		for (category of categories)
 		{
-			const files = fs.readdirSync('./commands/'+category);
-			if (files.length)
+			const files = Load.command(null, category);	
+			if (files != null && files.length)
 				_commands[category] = {};
 			for (file of files)
 			{
-				if (fs.lstatSync('./commands/'+category+'/' +file).isFile())
+				if (Load.is_file('commands', category, file))
 				{
-		    		let command = require('../commands/'+category+'/' +file);
-					try {
-						command.doc = require('../json/docs/commands/'+category+'/' +file+'on');
-			    	}
-					catch (e) {
-						Log.error("Documentation non trouvee pour la commande "+command.name+' a l\'emplacement', 'json/docs/commands/'+category+'/' +file+'on');
-						command.doc = null;
-					}
-					_commands[category][command.name] = command;
+		    		let command = Load.command(file, category);
+		    		command.doc = Load.help(category, file+'on');
+		    		_commands[category][command.name] = command;
 				}
 			}
 		}
