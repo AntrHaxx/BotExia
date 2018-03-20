@@ -1,5 +1,11 @@
 global.config;
 global.message;
+try {
+    config = require('./json/config.json');
+}
+catch (e) {
+    return Log.error("Creez le fichier de configuration", "json/config.json");
+}
 global.fs = require('fs');
 global.Discord = require('discord.js');
 global.client = new Discord.Client();
@@ -7,13 +13,6 @@ global.Lng = require('./helpers/lng.js');
 global.Msg = require('./helpers/msg');
 global.Log = require('./helpers/log');
 global.Command = require('./helpers/command');
-
-try {
-    config = require('./json/config.json');
-}
-catch (e) {
-    return Log.error("Creez le fichier de configuration", "json/config.json");
-}
 
 client.on('message', message => {
     if (!message.content.startsWith(config.prefix) || message.author.bot) return;
@@ -23,8 +22,11 @@ client.on('message', message => {
 	const commandName = args.shift().toLowerCase();
 
 	try {
-        if (!Command.call(commandName, args))
+        let res = Command.call(commandName, args);
+        if (res == 3)
             Msg.error("lng:denied permission");
+        else if (res == 2)
+            Msg.error("Commande \""+commandName+"\" non trouvee");
 	}
 	catch (error) {	
 		Log.error(error, "index.js:onMessage");

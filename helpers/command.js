@@ -51,19 +51,18 @@ var Command = function()
 	**	Appelle une commande
 	**
 	**	@param	search	[str]	Commande a chercher
-	**	@return 		[bool]	Etat de la commande
+	**	@return 		[int]	Etat de la commande
 	*/
 	this.call = function (search, args = null)
 	{
 		let command = this.get(search);
 		if (command == null)
-			return false;
+			return 2;
 		if (!this.is_allowed(command))
-			return false;
+			return 3;
 		if (typeof args == "string")
 			args = args.split(/ +/);
-		command.execute(message, args, client);
-		return true;
+		return command.execute(message, args, client);
 	};
 
 	/*
