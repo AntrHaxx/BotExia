@@ -43,6 +43,7 @@ var Msg = function ()
 	**	@return 			[bool]	TRUE si message bien envoye, sinon FALSE
 	*/
 	this.info = function(message, target = null, type = "send") {
+		message = Lng.parse(message);
 		return this.format({
 			description: message,
 			author: {
@@ -63,6 +64,7 @@ var Msg = function ()
 	**	@return 			[bool]	TRUE si message bien envoye, sinon FALSE
 	*/
 	this.success = function(message, target = null, type = "reply") {
+		message = Lng.parse(message);
 		return this.format({
 			description: message,
 			author: {
@@ -83,6 +85,7 @@ var Msg = function ()
 	**	@return 			[bool]	TRUE si message bien envoye, sinon FALSE
 	*/
 	this.warning = function(message, target = null, type = "reply") {
+		message = Lng.parse(message);
 		return this.format({
 			description: message,
 			author: {
@@ -103,6 +106,7 @@ var Msg = function ()
 	**	@return 			[bool]	TRUE si message bien envoye, sinon FALSE
 	*/
 	this.error = function(message, target = null, type = "reply") {
+		message = Lng.parse(message);
 		return this.format({
 			description: message,
 			author: {

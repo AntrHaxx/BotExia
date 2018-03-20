@@ -191,8 +191,8 @@ var Command = function()
 		{
 			let perm = command.permissions[type];
 			if (type == message.channel.type)
-				return (perm == "*" || _has_role(message, perm)) ? true : false;
-			else if (type == "*" && (perm == "*" || _has_role(message, perm)))
+				return (perm == "*" || _has_role(perm)) ? true : false;
+			else if (type == "*" && (perm == "*" || _has_role(perm)))
 				all = true;
 		}
 		return all;

@@ -12,6 +12,8 @@ var Log = function ()
 	*/
 	this.info = function (msg, append = "")
 	{
+		msg = Lng.parse(msg);
+		append = Lng.parse(append);
 		this.format("log", "  ".bgBlue.underline.strikethrough+(" "+msg+" ").bgWhite.black+(" "+append+" ").bgWhite.black.bold.inverse);
 	};
 
@@ -25,6 +27,8 @@ var Log = function ()
 	*/
 	this.success = function (msg, append = "")
 	{
+		msg = Lng.parse(msg);
+		append = Lng.parse(append);
 		this.format("log", "  ".bgGreen.underline.strikethrough+(" "+msg+" ").bgWhite.black+(" "+append+" ").bgWhite.black.bold.inverse);
 	};
 
@@ -38,6 +42,8 @@ var Log = function ()
 	*/
 	this.warning = function (msg, append = "")
 	{
+		msg = Lng.parse(msg);
+		append = Lng.parse(append);
 		this.format("log", "  ".bgYellow.underline.strikethrough+(" "+msg+" ").bgWhite.black+(" "+append+" ").bgWhite.black.bold.inverse);
 	};
 
@@ -51,6 +57,8 @@ var Log = function ()
 	*/
 	this.error = function (msg, append = "")
 	{
+		msg = Lng.parse(msg);
+		append = Lng.parse(append);
 		this.format("error", "  ".bgRed.underline.strikethrough+(" "+msg+" ").bgWhite.black+(" "+append+" ").bgWhite.black.bold.inverse);
 	};
 

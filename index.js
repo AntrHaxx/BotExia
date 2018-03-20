@@ -3,6 +3,7 @@ global.message;
 global.fs = require('fs');
 global.Discord = require('discord.js');
 global.client = new Discord.Client();
+global.Lng = require('./helpers/lng.js');
 global.Msg = require('./helpers/msg');
 global.Log = require('./helpers/log');
 global.Command = require('./helpers/command');
@@ -23,7 +24,7 @@ client.on('message', message => {
 
 	try {
         if (!Command.call(commandName, args))
-            Msg.error("Vous n'etes pas autorise a utiliser cette commande.");
+            Msg.error("lng:denied permission");
 	}
 	catch (error) {	
 		Log.error(error, "index.js:onMessage");
