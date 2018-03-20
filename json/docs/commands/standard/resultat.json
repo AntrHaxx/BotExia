@@ -1,0 +1,6 @@
+{
+	"name": "resultat",
+	"synopsis": "**\\*resutltat <Channel ou envoyer le msg>**",
+	"description": "Permet de donner les resultats du vote dans un des deux channel disponible : \n - Debug \n - manger",
+	"author": "CaptainBaroud"
+}

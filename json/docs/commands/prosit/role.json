@@ -1,0 +1,6 @@
+{
+	"name": "role",
+	"synopsis": "**\\*role <Nom du role>**",
+	"description": "Permet de savoir qui a un role en pariculier parmis : \n- Gestionaire \n - Animateur \n - Secretaire \n - Scribe",
+	"author": "CaptainBaroud"
+}

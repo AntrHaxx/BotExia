@@ -2,6 +2,9 @@ module.exports = {
     name : "clear",
     description : "Permet d'effacer jusqu'a 99 messages",
     usage : "`*clear <NbrDeMessages>`",
+    permissions: {
+        "*": "*"
+    },
     execute(message, args){
         const amount = parseInt(args[0]) +1
         

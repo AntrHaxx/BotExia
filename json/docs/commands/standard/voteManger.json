@@ -1,0 +1,6 @@
+{
+	"name": "voteManger",
+	"synopsis": "**\\*voteManger <Lieux>**",
+	"description": "Permet de voter en cas de bug de la dtection des reactions emojis",
+	"author": "CaptainBaroud"
+}

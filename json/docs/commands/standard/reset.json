@@ -1,0 +1,6 @@
+{
+	"name": "reset",
+	"synopsis": "**\\*reset <Valeure a reset>**",
+	"description": "Permet de changer le numero du prosit",
+	"author": "CaptainBaroud"
+}
