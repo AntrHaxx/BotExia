@@ -13,7 +13,7 @@ var Msg = function () {
 	};
 
 	this.channel_exists = function(channel) {
-		return Client.channels.find('name', channel) != null;
+		return client.channels.find('name', channel) != null;
 	}
 
 	this.info = function(message, target = null, type = "send") {
@@ -117,7 +117,7 @@ var Msg = function () {
 
 		if (type == "send")
 			if (target != null)
-				Client.channels.find('name', target).send({embed});
+				client.channels.find('name', target).send({embed});
 			else
 				_message.channel.send({embed});
 		else if (type == "reply")

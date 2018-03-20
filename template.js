@@ -1,7 +1,8 @@
 exports = {
     name : "",
-    description : "",
-    usage : "``",
+    permissions: {
+        "*": "*"
+    },
     execute(message){
 
     },

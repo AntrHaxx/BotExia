@@ -1,5 +1,8 @@
 module.exports = {
-    name : 'send',
+	name : 'send',
+	permissions: {
+        "*": "*"
+    },
     execute(message, args, client){
     	const channel = args[0];
     	const msg = args.slice(1).join(' ');
