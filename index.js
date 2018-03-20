@@ -9,7 +9,7 @@ catch (e) {
 global.fs = require('fs');
 global.Discord = require('discord.js');
 global.client = new Discord.Client();
-global.Lng = require('./helpers/lng.js');
+global.Lng = require('./helpers/lng');
 global.Msg = require('./helpers/msg');
 global.Log = require('./helpers/log');
 global.Command = require('./helpers/command');

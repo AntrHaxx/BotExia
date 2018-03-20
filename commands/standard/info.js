@@ -2,10 +2,13 @@ module.exports = {
   name : "info",
   description : "Info relative à une commande precise",
   usage : "`*info <NomDeLaCommande>`",
+  permissions: {
+    "*": "*"
+  },
   execute(message, args, client){
     if (!args.length)
       return Msg.error('N\'oulis pas de mettre le nom de la commande');
-    let command = Command.search(args);
+    let command = Command.get(args);
     if (command == null)
       return Msg.error("Ce n\'est pas une commande valide");
     Msg.format({

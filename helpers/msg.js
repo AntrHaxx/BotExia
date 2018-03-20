@@ -153,14 +153,14 @@ var Msg = function ()
 			embed.setTimestamp();
 		if (format.author != undefined)
 		{
-			let name = format.author.name != undefined ? format.author.name : null;
-			let icon_url = format.author.icon_url != undefined ? format.author.icon_url : null;
+			let name = format.author.name != undefined ? format.author.name : "";
+			let icon_url = format.author.icon_url != undefined ? format.author.icon_url : "";
 			embed.setAuthor(name, icon_url);
 		}
 		if (format.footer != undefined)
 		{
-			let text = format.author.icon_url != undefined ? format.footer.text : null;
-			let icon_url = format.author.icon_url != undefined ? format.footer.icon_url : null;
+			let text = format.author.icon_url != undefined ? format.footer.text : "";
+			let icon_url = format.author.icon_url != undefined ? format.footer.icon_url : "";
 			embed.setFooter(text, icon_url);
 		}
 		if (format.fields != undefined && typeof format.fields == "object" && format.fields != null)

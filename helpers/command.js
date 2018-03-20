@@ -111,19 +111,22 @@ var Command = function()
 
 	/*
 	**	List
-	**	Retourne la liste des noms de commandes
+	**	Retourne la liste des commandes
 	**
-	**	@param	category [str]	Nom de la categorie a lire
-	**	@return 		[mixed]	Si category vaut null, retpurne toutes les 
-	**								commandes dans leurs categories respectives.
-	**							Si category est defini retourne les commandes
-	**								de la categorie
-	**							Si category defini et invalide, retourne null
+	**	@param	category 	[str]	Nom de la categorie a lire
+	**	#param	array 		[bool]	TRUE retourne la liste des noms de commandes
+	**	@return 			[mixed]	Si category vaut null, retpurne toutes les 
+	**									commandes dans leurs categories respectives.
+	**								Si category est defini retourne les commandes
+	**									de la categorie
+	**								Si category defini et invalide, retourne null
 	*/
-	this.list = function(category = null)
+	this.list = function(category = null, array = false)
 	{
 		if (category != null && _commands[category] != undefined)
 		{
+			if (array == false)
+				return _commands[category];
 			let list = [];
 			for (let command in _commands[category])
 				list.push(command);
@@ -131,6 +134,8 @@ var Command = function()
 		}
 		else if (category == null)
 		{
+			if (array == false)
+				return _commands;
 			let list = {};
 			for (category in _commands)
 			{
