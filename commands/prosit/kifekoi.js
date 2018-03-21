@@ -14,7 +14,7 @@ module.exports = {
  
             if (pr[pro] != undefined)
                 prosit = pr[pro];
-
+console.log(prosit);
           const embed = {
             "title": "Kifekoi",
             "color": 34074, 
