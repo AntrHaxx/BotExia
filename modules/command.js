@@ -80,7 +80,6 @@ var Command = function()
 	*/
 	this.get = function (search)
 	{
-
 	    for (category in _commands)
 	    {
 	        for (command in _commands[category])

@@ -122,7 +122,9 @@ var Msg = function ()
 	**	Affiche un message enrichi sur Discord
 	**
 	**	@param	format 	[onj]	Objet avec le contenu a afficher sur Discord
-	**	@param	target	[str]	Si defini, channel de destination
+	**	@param	target	[mixed]	Nom du channel cible
+	**							[ch1, ch2, chN] envoie sur les channels cibles
+	**							"*" Envoie sur tous les channels
 	**	@param	type 	[str]	Type de message (send/reply)
 	**	@return 		[bool]	TRUE si message bien envoye, sinon FALSE
 	*/
@@ -183,7 +185,22 @@ var Msg = function ()
 
 		if (type == "send")
 			if (target != null)
-				client.channels.find('name', target).send({embed});
+			{
+				if (typeof target == "object")
+					for (tg of target)
+					{
+						tg =client.channels.find('name', tg);
+						if (tg != null)
+							tg.send({embed});
+					}
+				else
+					if (target == "*")
+						client.channels.forEach(function(elm, key) {
+							elm.send({embed});
+						});
+					else
+						client.channels.find('name', target).send({embed});
+			}
 			else
 				global.message.channel.send({embed});
 		else if (type == "reply")

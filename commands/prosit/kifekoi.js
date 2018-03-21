@@ -1,24 +1,22 @@
 module.exports = {
     name : "kifekoi",
     description : "Sa sert pus a rien",
-        usage : "`*kifekoi`",
-        permissions: {
+    usage : "`*kifekoi`",
+    permissions: {
         "*": "*"
     },
     execute(message){
-            const  pr = Load.json('pr');
-            var { pro } = Load.json('prosit');
-            var prosit = null;
-            pro = parseInt(pro) % pr.length;
+        const  pr = Load.json('pr');
+        var { pro } = Load.json('prosit');
+        var prosit = null;
+        pro = parseInt(pro) % pr.length;
 
-            var prositAller = client.channels.find("name", "role");
+        if (pr[pro] != undefined)
+            prosit = pr[pro];
+        else
+            return Msg.error("Prosit non trouve");
 
-            if (pr[pro] != undefined)
-                prosit = pr[pro];
-            else
-                return Msg.error("Prosit non trouve");
-
-          const embed = {
+        const embed = {
             "title": "Kifekoi",
             "color": 34074, 
      
@@ -49,8 +47,6 @@ module.exports = {
             ]
         };     
 
-    prositAller.send({embed})
-    
-    console.log("Sa marche");
-  },
+        Msg.info(embed, "role");
+    },
 }
