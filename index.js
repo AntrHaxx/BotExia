@@ -71,7 +71,7 @@ client.on('messageReactionAdd', (reaction, message, args, client) =>
 	}
 	results = JSON.stringify(results);
 	fs.writeFile('./json/voteManger.json', results, 'utf8', function readFileCallback(err, data){
-	Log.success("Vote ecris dans voteManger.json");
+    	Log.success("Vote ecris dans voteManger.json");
 	});
 });
 
