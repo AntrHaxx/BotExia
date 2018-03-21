@@ -48,7 +48,7 @@ var Command = function()
 
 	/*
 	**	Call
-	**	Appelle une commande
+	**	Execute une commande
 	**
 	**	@param	search	[str]	Commande a chercher
 	**	@return 		[int]	Etat de la commande
