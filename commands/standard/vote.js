@@ -1,5 +1,4 @@
-var has_voted = function(id, options)
-{
+var has_voted = function(id, options) {
 	for (let i = 0; i < options.length; i++)
 	{
 		if (options[i].votes.includes(id))
@@ -8,7 +7,7 @@ var has_voted = function(id, options)
 	return -1;
 };
 
-function is_empty(obj) {
+var is_empty = function(obj) {
 	for (key in obj)
 		return false;
 	return true;
@@ -278,22 +277,32 @@ module.exports = {
 			let date = new Date(data.date);
 			date = date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear()+' ('+date.getHours()+':'+date.getMinutes()+')';
 
-			let fields = [];
-			for (let i = 0; i < data.options.length; i++)
-				fields.push({name: (i + 1)+") "+data.options[i].label, value: "**"+data.options[i].votes.length+"** voix"});
-
 			Msg.format({
 				title: data.name,
 				author: {name: user+" | "+date, avatar},
 				description: data.description,
 				color: data.closed ? 0xFF0000 : 0x00FF00,
 				thumbnail: "https://www.soils.org/files/images/science-policy/check-box.png",
-				fields: fields,
 				footer: {
 					text: data.closed ? "Sondage Ferme" : "Sondage Ouvert",
 					icon_url: data.closed ? "http://www.csw-iba.org/swfu/d/lock.png" : "http://icons.iconarchive.com/icons/double-j-design/diagram-free/128/lock-unlock-icon.png"
 				}
 			});
+
+			for (let i = 0; i < data.options.length; i++)
+			{
+				let option = (i + 1)+") "+data.options[i].label;
+				let votes = "**"+data.options[i].votes.length+"** voix";
+				Msg.format({
+					author: {
+						name: option
+					},
+					description: votes,
+					footer: {
+						text: "Vote: "+data.name
+					}
+				});
+			}
 		}
 		else
 			Msg.error('Aucun vote ne correspond a votre recherche.');

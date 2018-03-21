@@ -65,6 +65,7 @@ var Command = function()
 		try {
 			return command.execute(message, args, client);
 		} catch(e) {
+			console.log(new Error());
 			Log.error("Erreur d'execution de la commande "+search, e);
 		}
 	};

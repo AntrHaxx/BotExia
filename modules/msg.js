@@ -159,8 +159,8 @@ var Msg = function ()
 		}
 		if (format.footer != undefined)
 		{
-			let text = format.author.icon_url != undefined ? format.footer.text : "";
-			let icon_url = format.author.icon_url != undefined ? format.footer.icon_url : "";
+			let text = format.footer.text != undefined ? format.footer.text : "";
+			let icon_url = format.footer.icon_url != undefined ? format.footer.icon_url : "";
 			embed.setFooter(text, icon_url);
 		}
 		if (format.fields != undefined && typeof format.fields == "object" && format.fields != null)

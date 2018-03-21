@@ -63,7 +63,7 @@ var Load = function()
 				var data = fs.readdirSync('./'+path);
 		} catch(e) {
 			if (global.Log != undefined)
-				global.Log.error("Erreur de chargement", e);
+				global.Log.error("Erreur de chargement du fichier "+path, e);
 			else
 				console.log("Erreur de chargement du fichier "+path+":\n"+e);
 			return null;
