@@ -7,14 +7,17 @@ module.exports = {
     },
     execute(message){
             const  pr = Load.json('pr');
-            const { pro } = Load.json('prosit');
+            var { pro } = Load.json('prosit');
             var prosit = null;
-        
+            pro = parseInt(pro) % pr.length;
+
             var prositAller = client.channels.find("name", "role");
- 
+
             if (pr[pro] != undefined)
                 prosit = pr[pro];
-console.log(prosit);
+            else
+                return Msg.error("Prosit non trouve");
+
           const embed = {
             "title": "Kifekoi",
             "color": 34074, 
