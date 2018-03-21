@@ -62,7 +62,11 @@ var Command = function()
 			return 3;
 		if (typeof args == "string")
 			args = args.split(/ +/);
-		return command.execute(message, args, client);
+		try {
+			return command.execute(message, args, client);
+		} catch(e) {
+			Load.error("Erreur d'execution de la commande "+search, e);
+		}
 	};
 
 	/*
