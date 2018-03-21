@@ -56,18 +56,18 @@ var Load = function()
 	{
 		if (arguments[1] != undefined)
 			path = _merge_args(arguments);
-		try {
+		//try {
 			if (this.is_file(path))
 				var data = require("../"+path);
 			else if (this.is_directory(path))
 				var data = fs.readdirSync('./'+path);
-		} catch(e) {
+		/*} catch(e) {
 			if (global.Log != undefined)
 				global.Log.error("Erreur de chargement du fichier "+path, e);
 			else
 				console.log("Erreur de chargement du fichier "+path+":\n"+e);
 			return null;
-		};
+		};*/
 		return data;
 	};
 

@@ -62,12 +62,12 @@ var Command = function()
 			return 3;
 		if (typeof args == "string")
 			args = args.split(/ +/);
-		try {
+		//try {
 			return command.execute(message, args, client);
-		} catch(e) {
+		/*} catch(e) {
 			console.log(new Error());
 			Log.error("Erreur d'execution de la commande "+search, e);
-		}
+		}*/
 	};
 
 	/*

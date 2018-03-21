@@ -11,7 +11,7 @@ module.exports = {
             var prosit = null;
         
             var prositAller = client.channels.find("name", "role");
-
+ 
             if (pr[pro] != undefined)
                 prosit = pr[pro];
 

@@ -16,22 +16,25 @@ global.Msg = Load.module("msg");
 global.Command = Load.module("command");
 
 client.on('message', message => {
-    if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+    if (!message.content.startsWith(config.prefix) ||
+        message.author.bot ||
+        (!config.accept_all_instances && config.instance_owner != message.author.id))
+    return;
 
     global.message = message;
 	const args = message.content.slice(config.prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
-	try {
+	//try {
         let res = Command.call(commandName, args);
         if (res == 3)
             Msg.error("lng:denied permission");
         else if (res == 2)
             Msg.error("Commande \""+commandName+"\" non trouvee");
-	}
+	/*}
 	catch (error) {	
 		Log.error(error, "index.js:onMessage");
-    }
+    }*/
 });
 
 //--------------------------------------Vote reaction--------------------------------------
@@ -39,7 +42,8 @@ client.on('message', message => {
 
 client.on('messageReactionAdd', (reaction, message, args, client) =>
 {
-
+    console.log(message);
+    return ;
 	var results = require('./json/voteManger.json');
 	switch (reaction.emoji.id)
     {
@@ -79,6 +83,8 @@ client.on('messageReactionAdd', (reaction, message, args, client) =>
 
 client.on('messageReactionRemove', (reaction, member) =>
 {
+    console.log(message);
+    return ;
     switch (reaction.emoji.id)
     {
     //McDo
