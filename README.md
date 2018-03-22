@@ -76,3 +76,7 @@ La commande se compose de quatre parties principales
 *	**permissions**: Permet de definir qui a le droit d'executer la commande et dans quel contexte. Dans le cas present, tout le monde peut appeler **\*ping** depuis le serveur, depuis un groupe de discussion ou encore en message direct au bot.
 
 *	**execute**: Fonction principale appelee lors de l'appel a la commande. Elle recoit en argument un tableau contenant les mots tapes a la suite de vote commande. A l'interieur on trouve une condition verifiant que l'appel a la fonction se fait bien depuis un message Discord. On verra plus tard comment faire des appels internes aux commandes. Si l'appel provient bien d'un message, on renvoie un message a Discord, sinon on envoie la reponse au terminal.
+
+#### Utiliser la commande
+
+Une fois le bot lance avec la commande nodemon, allez sur votre serveur ou dans une discussion privee avec le bot et tapez **\*ping**
