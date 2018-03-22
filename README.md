@@ -31,6 +31,18 @@ Dans le dossier json vous trouverez un fichier **config.smple.json** que vous re
 
 Remplissez les quelques champs requis et vous serez prets a commander votre bot!
 
+*	**prefix**: Prefixe des commandes. Il sera utilise par le bot pour detecter que votre message est bien une commande et non un message classique.
+
+*	**token**:	Token genere par Discord lors de la creation de l'appli Discord bot via leur plateforme.
+
+*	**server_id**: Identifiant du serveur sur lequel le bot est installe.
+
+*	**instance_owner**; Identifiant de l'utilisateur detenant le bot. Il permet d'eviter la reconnaissance de commandes externes dans le cas ou plusieures instances du meme bot se retrouveraient sur le meme serveur.
+
+*	**accept_all_instances**; Active la reconnaissance des commandes externes.
+
+*	**default_language**: Definit la langue par defaut utilisee par le module de traduction.
+
 ### Commandes standard
 
 Un panel de commandes standard sont a votre disposition afin de vous montrer par l'exemple comment est structuree une commande et les possibilites qu'elle offre. Par exemple la commande standard ping:
@@ -57,7 +69,7 @@ Cette commande a pour but de repondre **Pong !** Lorsque vous tapez la commande 
 
 La commande se compose de quatre parties principales
 
-*	**name**; Le nom de la commande. Utilise lors de l'appel depuis le serveur.
+*	**name**; Le nom de la commande. Utilise lors de l'appel depuis le serveur. Dans le cas present, on tapera **\*ping**.
 
 *	**alias**; Liste d'alias de la commande qui vous permettront d'appeler une commande avec divers noms. L'appel a **\*ping** et **\*tesla** aura comme reponse **Pong !**.
 
