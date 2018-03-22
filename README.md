@@ -7,7 +7,29 @@ BotExia est une application basee surle module Discord.js permettant de gerer un
 *	Creation de commandes personnalisees
 	*	**Alias de commandes** pour des acces multiples a la meme commande
 	*	**Appels internes** invoquer des commandes depuis d'autres commandes pour creer des reponses en chaine
-	*	**Cron Jobs**	permet d'executer des commandes a des moments precis de maniere recurrente ou unique
+	*	**Cron Jobs**	permet de programmer des appels de commandes a des moments precis de maniere recurente
+	*	**Permissions** Definissez qui a le droit d'executer votre commande et dans quel contexte
+
+*	Documentations
+	*	Un fichier de documentation dedie pour chaque commande
+	*	Chargement et gestion automatique de la documentation
+
+*	Internationalisation
+	*	Support de diverses langues
+	*	Mots cles de detection de traduction a mettre dans le module de messagerie ou de log
+
+*	Messages riches preformates
+	*	Messages stylises
+	*	Envoi vers n'importe quel channel du serveur
+		*	Channel unique
+		*	Channels multiples
+		*	Tous les channels a la fois
+
+*	Logs stylises:
+	*	Messages preformates temoignant divers status: info, success, warning, error
+	*	Personnalisation poussee des messages de log grace a l'integration du module NodeJS **colors**
+
+*	Basses de donnees: supporte de sqlite grace au module NodeJS **sqlite3**
 
 ## Installation
 
