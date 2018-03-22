@@ -43,6 +43,10 @@ Remplissez les quelques champs requis et vous serez prets a commander votre bot!
 
 *	**default_language**: Definit la langue par defaut utilisee par le module de traduction.
 
+### Lancement
+
+Le bot etant installe et configure vous etes enfin pret a le lancr. Si ce n'est pas deja fait, rendez-vous a la racine de votre projet et tapez `nodemon`. Ce module se chargera de lancer votre projet NodeJS et de relancer le serveur si un fichier du projet est modifie. Ainsi, vous pourrez coder et sauvegarder sans vous soucier du serveur (sauf pour les bugs bien sur :D).
+
 ### Commandes standard
 
 Un panel de commandes standard sont a votre disposition afin de vous montrer par l'exemple comment est structuree une commande et les possibilites qu'elle offre. Par exemple la commande standard ping:
