@@ -65,7 +65,7 @@ module.exports = {
 
 Cette commande a pour but de repondre **Pong !** Lorsque vous tapez la commande \*ping sur votre serveur. Elle sert notamment a savoir si le bot est actif.
 
-### Decomposition de la commande
+#### Decomposition de la commande
 
 La commande se compose de quatre parties principales
 
