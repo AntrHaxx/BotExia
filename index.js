@@ -5,7 +5,7 @@ try {
     config = require('./json/config.json');
 }
 catch (e) {
-    return Log.error("Creez le fichier de configuration", "json/config.json");
+    return console.log("Creez le fichier de configuration: json/config.json");
 }
 global.fs = require('fs');
 global.Discord = require('discord.js');
@@ -120,7 +120,7 @@ client.on('messageReactionRemove', (reaction, member) =>
 });
 
 client.on('ready', () => {
-    client.users.get(config.instance_owner).sendMessage("*cron init");
+    client.users.get(config.instance_owner).send("*cron init");
     Log.success("Pret a servir !", client.readyAt);
 });
 
