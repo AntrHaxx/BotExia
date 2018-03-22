@@ -5,7 +5,7 @@ BotExia est une application basee surle module Discord.js permettant de gerer un
 ## Fonctionnalites
 
 *	Creation de commandes personnalisees
-	*	**Prefixes multiples**	pour ceux qui ne sont pas d'accord avec un prefixe. Vous pouvez definir un prefixe unique ou un tableau de prefixes acceptes.
+	*	**Prefixes multiples**	pour ceux qui ne sont pas d'accord avec un prefixe
 	*	**Alias de commandes** pour des acces multiples a la meme commande
 	*	**Appels internes** invoquer des commandes depuis d'autres commandes pour creer des reponses en chaine
 	*	**Cron Jobs**	permet de programmer des appels de commandes a des moments precis de maniere recurente
@@ -63,7 +63,7 @@ Dans le dossier json vous trouverez un fichier **config.smple.json** que vous re
 
 Remplissez les quelques champs requis et vous serez prets a commander votre bot!
 
-*	**prefix**: Prefixe des commandes. Il sera utilise par le bot pour detecter que votre message est bien une commande et non un message classique.
+*	**prefix**: Prefixe des commandes. Il sera utilise par le bot pour detecter que votre message est bien une commande et non un message classique. Vous pouvez definir un prefixe unique ou un tableau de prefixes acceptes.
 
 *	**token**:	Token genere par Discord lors de la creation de l'appli Discord bot via leur plateforme.
 
