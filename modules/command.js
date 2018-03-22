@@ -13,6 +13,8 @@ var Command = function()
 	*/
 	var _has_role = function(croles)
 	{
+		if (message == undefined || message == null)
+			return true;
 		let is = false;
 		let uroles = client.guilds.get(config.server_id).members.get(message.author.id).roles;
 		uroles.forEach(function(role, id) {
@@ -80,7 +82,6 @@ var Command = function()
 	*/
 	this.get = function (search)
 	{
-
 	    for (category in _commands)
 	    {
 	        for (command in _commands[category])
@@ -195,6 +196,8 @@ var Command = function()
 			command = this.get(command);
 		if (command == undefined || command == null)
 			return false;
+		if (message == undefined || message == null)
+			return true;
 		let all = false;
 		for (type in command.permissions)
 		{
