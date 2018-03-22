@@ -17,12 +17,30 @@ global.Msg = Load.module("msg");
 global.Command = Load.module("command");
 
 client.on('message', message => {
-    if (!message.content.startsWith(config.prefix) ||
-        (!config.accept_all_instances && config.instance_owner != message.author.id && !message.author.bot))
-    return;
+    if (typeof config.prefix == "string" && !message.content.startsWith(config.prefix))
+        return ;
+    else
+        var prefix = config.prefix;
+    if (typeof config.prefix == "object" && config.prefix != null)
+    {
+        let kill = true;
+        for (pfx of config.prefix)
+        {
+            if (message.content.startsWith(pfx))
+            {
+                var prefix = pfx;
+                kill = false;
+                break;
+            }
+        }
+        if (kill)
+            return ;
+    }
+    if (!config.accept_all_instances && config.instance_owner != message.author.id && !message.author.bot)
+        return;
 
     global.message = message;
-	const args = message.content.slice(config.prefix.length).split(/ +/);
+	const args = message.content.slice(prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
 	//try {
