@@ -210,7 +210,10 @@ var Load = function()
 		if (file == null && category != null)
 			return this.root('commands/'+category+'/');
 		else if (file != null &&category != null)
+		{
+			file += file.substr(-3, 3) != ".js" ? ".js" : "";
 			return this.root('commands/'+category+'/'+file);
+		}
 		else if (file != null && category == null)
 			return Command.get(file);
 		return null;

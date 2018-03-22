@@ -120,6 +120,7 @@ client.on('messageReactionRemove', (reaction, member) =>
 });
 
 client.on('ready', () => {
+    Load.command("cron", "standard").execute(null, ["init"]);
     Log.success("Pret a servir !", client.readyAt);
 });
 
