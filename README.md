@@ -79,4 +79,4 @@ La commande se compose de quatre parties principales
 
 #### Utiliser la commande
 
-Une fois le bot lance avec la commande nodemon, allez sur votre serveur ou dans une discussion privee avec le bot et tapez **\*ping**
+Une fois le bot lance avec la commande `nodemon`, allez sur votre serveur ou dans une discussion privee avec le bot et tapez **\*ping**.
