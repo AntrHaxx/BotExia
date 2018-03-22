@@ -63,7 +63,20 @@ module.exports = {
 		};
 	},
 	edit: function(args) {
-
+		var job = parseInt(args[0]) - 1;
+		var jobs = Load.json('cronjobs');
+		var entry = args[1];
+		var value = args.slice(2);
+		if (jobs[job] == undefined)
+			return Msg.error("Ce Cron Job n'existe pas");
+		else if (jobs[job][entry] == undefined)
+			return Msg.error("Entree invalide");
+		if (entry != "args")
+			value = value.join(' ');
+		jobs[job][entry] = value;
+		Msg.info("Cron Job modifie!");
+		obj = JSON.stringify(jobs);
+		fs.writeFile('./json/cronjobs.json', obj, 'utf8', function () {});
 	},
 	remove: function(args) {
 		var job = parseInt(args[0]) - 1;

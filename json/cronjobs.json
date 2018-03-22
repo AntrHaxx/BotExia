@@ -1,1 +1,1 @@
-[{"pattern":"* * * * *","command":"ping","args":[],"running":true}]
+[{"pattern":"* * * * *","command":"send","args":["debug","halo","moto"],"running":true}]
