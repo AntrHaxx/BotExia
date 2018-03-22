@@ -1,3 +1,4 @@
+// https://github.com/kelektiv/node-cron
 const Cron = require('cron');
 global.CronJobs = [];
 
@@ -40,12 +41,21 @@ module.exports = {
 	},
 	add: function(args) {
 		var jobs = Load.json('cronjobs');
-		var pattern = args.slice(0, 5).join(' ');
-		var command = args[5];
-		args = args.slice(6);
-		if (objs[0] != undefined && objs[0] == null)
-			delete objs[0];
+		var pattern = args.slice(0, 6);
+		var command = args[6];
+		args = args.slice(7);
+
+		if (jobs[0] != undefined && jobs[0] == null)
+			jobs = [];
+		if (pattern.length != 6)
+			return Msg.error("Le pattern doit etre compose de six elements.");
+		if (command == undefined || command == null || command == "")
+			return Msg.error("Il faut definir une commande a executer");
+		else if (Command.get(command) == null)
+			return Msg.error("La commande entree en parametre est invalide");
+
 		try {
+			pattern = pattern.join(' ');
 			CronJobs.push(new Cron.CronJob(pattern, function() {
 				Command.call(command, args);
 			}, null, false, 'Europe/Paris'));
@@ -67,12 +77,21 @@ module.exports = {
 		var jobs = Load.json('cronjobs');
 		var entry = args[1];
 		var value = args.slice(2);
+
 		if (jobs[job] == undefined)
 			return Msg.error("Ce Cron Job n'existe pas");
 		else if (jobs[job][entry] == undefined)
 			return Msg.error("Entree invalide");
 		if (entry != "args")
 			value = value.join(' ');
+		if (entry == "pattern" && value.length != 6)
+			return Msg.error("Le pattern doit etre compose de six elements.");
+		if (entry == "command" &&
+			(command == undefined || command == null || command == ""))
+			return Msg.error("Il faut definir une commande a executer");
+		else if (Command.get(command) == null)
+			return Msg.error("La commande entree en parametre est invalide");
+
 		jobs[job][entry] = value;
 		Msg.info("Cron Job modifie!");
 		obj = JSON.stringify(jobs);
@@ -118,6 +137,7 @@ module.exports = {
 	},
 	stop: function(args) {
 		var job = parseInt(args[0]) - 1;
+		var jobs = Load.json('cronjobs');
 		if (!this.running(job, true))
 			return Msg.info("Ce Cron Job n'est pas actif");
 		if (CronJobs[job] != undefined)

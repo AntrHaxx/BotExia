@@ -3,7 +3,10 @@ module.exports = {
 	permissions: {
 		"*": "*"
 	},
-	execute(message, args, client){
-		Msg.info("Pong! "+client.ping+"ms");
+	execute(message = null, args = null, client = null){
+		if (message == null || message.author == undefined)
+			Log.info("Pong! "+client.ping+"ms");
+		else
+			Msg.info("Pong! "+client.ping+"ms");
 	}
 };

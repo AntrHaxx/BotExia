@@ -1,5 +1,6 @@
 global.config;
 global.message;
+global.message = null;
 try {
     config = require('./json/config.json');
 }
@@ -17,8 +18,7 @@ global.Command = Load.module("command");
 
 client.on('message', message => {
     if (!message.content.startsWith(config.prefix) ||
-        message.author.bot ||
-        (!config.accept_all_instances && config.instance_owner != message.author.id))
+        (!config.accept_all_instances && config.instance_owner != message.author.id && !message.author.bot))
     return;
 
     global.message = message;
@@ -120,7 +120,7 @@ client.on('messageReactionRemove', (reaction, member) =>
 });
 
 client.on('ready', () => {
-    Load.command("cron", "standard").execute(null, ["init"]);
+    client.users.get(config.instance_owner).sendMessage("*cron init");
     Log.success("Pret a servir !", client.readyAt);
 });
 
