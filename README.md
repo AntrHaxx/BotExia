@@ -45,7 +45,9 @@ Remplissez les quelques champs requis et vous serez prets a commander votre bot!
 
 ### Lancement
 
-Le bot etant installe et configure vous etes enfin pret a le lancr. Si ce n'est pas deja fait, rendez-vous a la racine de votre projet et tapez `nodemon`. Ce module se chargera de lancer votre projet NodeJS et de relancer le serveur si un fichier du projet est modifie. Ainsi, vous pourrez coder et sauvegarder sans vous soucier du serveur (sauf pour les bugs bien sur :D).
+Le bot etant installe et configure vous etes enfin pret a le lancr. Si ce n'est pas deja fait, rendez-vous a la racine de votre projet et tapez `nodemon`. Ce module se chargera de lancer votre projet NodeJS et de relancer le serveur si un fichier du projet est modifie. Ainsi, vous pourrez coder et sauvegarder sans vous soucier du serveur (sauf pour les logs bugs bien sur :D).
+
+Si une erreur fatale empeche le redemarrage du serveur par nodemon, forcez la fermeture du programme (Ctrl+C d'habitude) et relancez la commande `nodemon`.
 
 ### Commandes standard
 
