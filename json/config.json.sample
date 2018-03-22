@@ -1,11 +1,8 @@
 {
     "prefix" : "*",
-    "token" : "YOUR_TOKEN_GOES_HERE",
-    "server_id": "YOUR_SERVER_ID_GOES_HERE",
-    "sens_de_la_vie": 42,
-    "passwords_array": ["please", "dont", "hack", "me"],
-    "secret_passcodes": {
-        "bank": 1234,
-        "home": 4321
-    }
+    "token" : "BOT TOKEN HERE",
+    "server_id": "YOUR SERVER ID HERE",
+    "instance_owner": "YOUR USER ID HERE",
+    "accept_all_instances": false,
+    "default_language": "en"
 }
