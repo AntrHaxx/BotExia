@@ -1,0 +1,74 @@
+[
+    {
+     "animateur" : "<:gurvan:377403236631445505>",
+     "secretaire" : "<:franso:424220588282740736>",
+     "scribe" : "<:benj:377447671243210755>",
+     "inutile" : "<:kevkev:377452016655663114>"
+     },
+     {
+     "animateur" : "<:kevkev:377452016655663114>",
+     "secretaire" : "<:remi:377401668477911042>",
+     "scribe" : "<:louis:377400607990087680>",
+     "inutile" : "<:mmouky:377453448594980868>"
+     },
+     {
+     "animateur" : "<:franso:424220588282740736>",
+     "secretaire" : "<:julien:377451426286141440>",
+     "scribe" : "<:gwegwe:377449539499589633>",
+     "inutile" : "<:erwan:421697676795576332>"
+     },
+     {
+     "animateur" : "<:remi:377401668477911042>",
+     "secretaire" : "<:benj:377447671243210755>",
+     "scribe" : "<:erwan:421697676795576332>",
+     "inutile" : "<:gurvan:377403236631445505>"
+     },
+     {
+     "animateur" : "<:pauline:377452473817890816>",
+     "secretaire" : "<:gwegwe:377449539499589633>",
+     "scribe" : "<:kevkev:377452016655663114>",
+     "inutile" : "<:amiel:377450327135485963>"
+     },
+     {
+     "animateur" : "<:benj:377447671243210755>",
+     "secretaire" : "<:kevkev:377452016655663114>",
+     "scribe" : "<:julien:377451426286141440>",
+     "inutile" : "<:gwegwe:377449539499589633>"
+     },
+     {
+     "animateur" : "<:mmouky:377453448594980868>",
+     "secretaire" : "<:gurvan:377403236631445505>",
+     "scribe" : "<:remi:377401668477911042>",
+     "inutile" : "<:pauline:377452473817890816>"
+     },
+    {
+     "animateur" : "<:gwegwe:377449539499589633>",
+     "secretaire" : "<:pauline:377452473817890816>",
+     "scribe" : "<:franso:424220588282740736>",
+     "inutile" : "<:louis:377400607990087680>"
+     },
+     {
+     "animateur" : "<:louis:377400607990087680>",
+     "secretaire" : "<:erwan:421697676795576332>",
+     "scribe" : "<:mmouky:377453448594980868>",
+     "inutile" : "<:remi:377401668477911042>"
+     },
+     {
+     "animateur" : "<:amiel:377450327135485963>",
+     "secretaire" : "<:mmouky:377453448594980868>",
+     "scribe" : "<:gurvan:377403236631445505>",
+     "inutile" : "<:julien:377451426286141440>"
+     },
+     {
+     "animateur" : "<:erwan:421697676795576332>",
+     "secretaire" : "<:amiel:377450327135485963>",
+     "scribe" : "<:pauline:377452473817890816>",
+     "inutile" : "<:benj:377447671243210755>"
+     },
+     {
+     "animateur" : "<:julien:377451426286141440>",
+     "secretaire" : "<:louis:377400607990087680>",
+     "scribe" : "<:amiel:377450327135485963>",
+     "inutile" : "<:franso:424220588282740736>"
+     }
+ ]

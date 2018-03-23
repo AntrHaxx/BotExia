@@ -5,8 +5,9 @@ try {
     config = require('./json/config.json');
 }
 catch (e) {
-    return Log.error("Creez le fichier de configuration", "json/config.json");
+    return console.log("Creez le fichier de configuration: json/config.json");
 }
+
 global.fs = require('fs');
 global.Discord = require('discord.js');
 global.client = new Discord.Client();
@@ -17,7 +18,7 @@ global.Msg = Load.module("msg");
 global.Command = Load.module("command");
 
 client.on('message', message => {
-    if (!message.content.startsWith(config.prefix) ||
+    if (!message.content.startsWith(config.prefix)||
         (!config.accept_all_instances && config.instance_owner != message.author.id && !message.author.bot))
     return;
 
@@ -44,7 +45,7 @@ client.on('messageReactionAdd', (reaction, message, args, client) =>
 {
     console.log(message);
     return ;
-	var results = require('./json/voteManger.json');
+	var results = Load.json('voteManger');
 	switch (reaction.emoji.id)
     {
     	//McDo
@@ -74,7 +75,7 @@ client.on('messageReactionAdd', (reaction, message, args, client) =>
         break;    
 	}
 	results = JSON.stringify(results);
-	fs.writeFile('./json/voteManger.json', results, 'utf8', function readFileCallback(err, data){
+	fs.writeFile('../json/voteManger.json', results, 'utf8', function readFileCallback(err, data){
     	Log.success("Vote ecris dans voteManger.json");
 	});
 });

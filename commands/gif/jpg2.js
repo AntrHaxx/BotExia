@@ -1,13 +1,13 @@
 module.exports = {
-    name : "bravo",
+    name : "zizi",
     description : "Penis",
-    usage : "`*bravo`",
+    usage : "`*zizi`",
     permissions: {
         "*": "*"
     },
     execute(message){
         message.channel.send({
-        file : "image/video1.mp4"
+        file : "image/zizi.jpg"
         })
     },
 }
