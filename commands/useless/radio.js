@@ -105,7 +105,6 @@ module.exports = {
 				continue
 			let fields = [];
 			let stations = Load.json("radios", src);
-			console.log(src);
 			for (let station in stations)
 			{
 				fields.push({
