@@ -18,6 +18,8 @@ global.File = Load.module("file");
 global.Command = Load.module("command");
 
 client.on('message', message => {
+    if (!config.accept_all_instances && config.instance_owner != message.author.id)
+        return;
     if (typeof config.prefix == "string" && !message.content.startsWith(config.prefix))
         return ;
     else
@@ -37,8 +39,6 @@ client.on('message', message => {
         if (kill)
             return ;
     }
-    if (!config.accept_all_instances && config.instance_owner != message.author.id && !message.author.bot)
-        return;
 
     global.message = message;
 	const args = message.content.slice(prefix.length).split(/ +/);
@@ -61,8 +61,6 @@ client.on('message', message => {
 
 client.on('messageReactionAdd', (reaction, message, args, client) =>
 {
-    console.log(message);
-    return ;
 	var results = require('./json/voteManger.json');
 	switch (reaction.emoji.id)
     {
@@ -102,8 +100,6 @@ client.on('messageReactionAdd', (reaction, message, args, client) =>
 
 client.on('messageReactionRemove', (reaction, member) =>
 {
-    console.log(message);
-    return ;
     switch (reaction.emoji.id)
     {
     //McDo
