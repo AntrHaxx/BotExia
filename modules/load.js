@@ -26,7 +26,11 @@ var Load = function()
 	{
 		if (arguments[1] != undefined)
 			path = _merge_args(arguments);
-		return fs.lstatSync('./'+path).isFile();
+		try {
+			return fs.lstatSync('./'+path).isFile();
+		} catch(e) {
+			return false;
+		};
 	};
 
 	/*
@@ -40,7 +44,11 @@ var Load = function()
 	{
 		if (arguments[1] != undefined)
 			path = _merge_args(arguments);
-		return fs.lstatSync('./'+path).isDirectory();
+		try {
+			return fs.lstatSync('./'+path).isDirectory();
+		} catch(e) {
+			return false;
+		};
 	};
 
 	/*
@@ -61,6 +69,8 @@ var Load = function()
 				var data = require("../"+path);
 			else if (this.is_directory(path))
 				var data = fs.readdirSync('./'+path);
+			else
+				var data = null;
 		} catch(e) {
 			if (global.Log != undefined)
 				global.Log.error("Erreur de chargement du fichier "+path, e);

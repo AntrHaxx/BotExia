@@ -66,7 +66,7 @@ module.exports = {
 		obj[vote.name] = vote;
 		obj = JSON.stringify(obj);
 		Msg.success('Vote cree avec succes');
-		global.fs.writeFile('./json/votes.json', obj, 'utf8', function () {});
+		fs.writeFile('./json/votes.json', obj, 'utf8', function () {});
 	},
 
 	update: function(message, args, client) {
@@ -195,7 +195,7 @@ module.exports = {
 	list: function(message, args = [], client) {
 		args = args.join(' ');
 		let self = this;
-		global.fs.readFile('./json/votes.json', 'utf8', function readFileCallback(err, data){
+		fs.readFile('./json/votes.json', 'utf8', function readFileCallback(err, data){
 			if (err)
 				console.log(err);
 			else
