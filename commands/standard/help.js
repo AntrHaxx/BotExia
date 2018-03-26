@@ -1,7 +1,7 @@
 module.exports = {
     name : 'help',
     permissions: {
-        "*": ["@everyone"]
+        "*": "*"
     },
     execute(message, args, client){
         if (!args.length) {

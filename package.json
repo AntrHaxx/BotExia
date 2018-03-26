@@ -18,7 +18,8 @@
     "nodemon": "^1.17.2",
     "opusscript": "0.0.6",
     "request": "^2.85.0",
-    "sqlite3": "^4.0.0"
+    "sqlite3": "^4.0.0",
+    "steam-user": "^3.26.0"
   },
   "devDependencies": {},
   "repository": {
