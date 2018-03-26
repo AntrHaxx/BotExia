@@ -11,7 +11,8 @@ module.exports = {
         const promo = Load.json('promo');
         var prosit = null;
         var tete = null;
-        cal = parseInt(pro) % pr.length;
+        pro = parseInt(pro);
+        cal = (parseInt(pro) %12)-1;
 
         var role = client.channels.find("name", "role");
 
