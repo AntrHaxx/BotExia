@@ -8,17 +8,28 @@ module.exports = {
     execute(message){
         const  pr = Load.json('pr');
         var { pro } = Load.json('prosit');
+        const promo = Load.json('promo');
         var prosit = null;
-        pro = parseInt(pro) % pr.length;
+        var tete = null;
+        pro = parseInt(pro);
+        cal = (parseInt(pro) %12)-1;
 
-        if (pr[pro] != undefined)
-            prosit = pr[pro];
+        var role = client.channels.find("name", "role");
+
+        if (pr[cal] != undefined)
+            prosit = pr[cal];
         else
             return Msg.error("Prosit non trouve");
+
+        if (promo[cal] != undefined)
+            tete = promo[cal];
+        else 
+            return Msg.error("Tete non trouvée");
 
         const embed = {
             "title": "Kifekoi",
             "color": 34074, 
+            "description" : "On est au prosit : " +pro,
      
             "footer": {
                 "text": "Exia.cesi | Promo St-Nazaire-2017"
@@ -30,23 +41,23 @@ module.exports = {
             "fields": [
                 {
                     "name" : "Animateur",
-                    "value" : "Ce coup ci l'animateur c'est : " +prosit.animateur
+                    "value" : "Ce coup ci l'animateur c'est : " +prosit.animateur +tete.animateur,
                 },
                 {
                     "name": "Secretaire",
-                    "value" :  "Bon aller go au tableau " +prosit.secretaire
+                    "value" :  "Bon aller go au tableau " +prosit.secretaire +tete.secretaire,
                 },
                 {
                     "name" : "Scribe",
-                    "value" : "Aller hop hop hop on sort word et on prend en note " +prosit.scribe +"\nPS : tu as la commande `*template` y'a plus qu'a remplir !"
+                    "value" : "Aller hop hop hop on sort word et on prend en note " +prosit.scribe +tete.scribe +"\nPS : tu as la commande `*template` y'a plus qu'a remplir !",
                 },
                 {
                     "name" : "Gestionaire",
-                    "value" : "Et ce coup là c'est à ton tour de te tourner les pouces : " +prosit.inutile
+                    "value" : "Et ce coup là c'est à ton tour de te tourner les pouces : " +prosit.inutile +tete.inutile,
                 }
             ]
         };     
 
-        Msg.info(embed, "role");
+        role.send({embed});
     },
 }
