@@ -176,8 +176,8 @@ var Msg = function ()
 			}
 		}
 
-		if (_is_empty(format) ||
-			(target != null && !this.channel_exists(target)))
+		if (_is_empty(format) || target == null ||
+			(typeof target != "object" && target != '*' && !this.channel_exists(target)))
 		{
 			Log.error("Channel "+target+" invalide");
 			return false;
@@ -195,8 +195,9 @@ var Msg = function ()
 					}
 				else
 					if (target == "*")
-						client.channels.forEach(function(elm, key) {
-							elm.send({embed});
+						client.channels.forEach(function(elm, key, map) {
+							if (typeof elm.send == "function")
+								elm.send({embed});
 						});
 					else
 						client.channels.find('name', target).send({embed});
