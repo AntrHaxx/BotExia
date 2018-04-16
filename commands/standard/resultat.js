@@ -42,7 +42,7 @@ module.exports = {
               },
               {
                 "name": "Geant",
-                "value" :  "Nombre de vote pour geant : "+bk
+                "value" :  "Nombre de vote pour geant : "+geant
               },
               {
                 "name": "RU",
@@ -95,7 +95,7 @@ module.exports = {
             ]
           };
 
-        var other = client.channels.find('name', 'on-manj-ou');
+        var other = client.channels.find('name', '🍔manger-au-̶b̶k̶-̶');
         var debug = client.channels.find('name', 'debug');
 
         if (!info.length) {

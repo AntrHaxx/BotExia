@@ -5,16 +5,16 @@ module.exports = {
     permissions: {
         "*": "*"
     },
-    execute(message){
+    execute(message, member){
         const  pr = Load.json('pr');
         var { pro } = Load.json('prosit');
         const promo = Load.json('promo');
         var prosit = null;
         var tete = null;
         pro = parseInt(pro);
-        cal = (parseInt(pro) %12)-1;
+        cal = (parseInt(pro) %11)-1;
 
-        var role = client.channels.find("name", "role");
+        var role = client.channels.find("name", "👥roles");
 
         if (pr[cal] != undefined)
             prosit = pr[cal];
@@ -25,6 +25,8 @@ module.exports = {
             tete = promo[cal];
         else 
             return Msg.error("Tete non trouvée");
+
+        scr = prosit.scribe;
 
         const embed = {
             "title": "Kifekoi",
@@ -56,8 +58,8 @@ module.exports = {
                     "value" : "Et ce coup là c'est à ton tour de te tourner les pouces : " +prosit.inutile +tete.inutile,
                 }
             ]
-        };     
-
+        }; 
+        
         role.send({embed});
     },
 }

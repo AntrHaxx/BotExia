@@ -16,12 +16,13 @@ module.exports = {
 			message.channel.send('N\'oulie pas de mette le lieux');
 		}
 		else {
-            var results = require('../../json/voteManger.json');
+            var results = Load.json('voteManger');
             if (results[manger] == undefined) {
-				return message.reply('**'+manger+'** n\'est pas un lieux valide ' +manger);
+				return message.reply('**'+manger+'** n\'est pas un lieux valide ');
 			}
             else{
-                if (args[0] == 'reset'){
+                if (manger[0] === 'reset'){
+                    console.log("Salut on est dans reset");
                     results['bk']=0;
                     results['mcdo']=0;
                     results['ange']=0;
@@ -32,10 +33,9 @@ module.exports = {
                 var fs = require('fs');
                 results[manger]++;
                 results = JSON.stringify(results);
-                fs.writeFile('./json/voteManger.json', results, 'utf8', function readFileCallback(err, data){
-                    message.reply('Vote enregistre');
-                });
-               
+	            fs.writeFile('./json/voteManger.json', results, 'utf8', function readFileCallback(err, data){
+		        Log.success('Vote enregistre');
+	            });
             }
         }
     }

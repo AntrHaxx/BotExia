@@ -6,7 +6,7 @@ module.exports = {
         "*": "*"
     },
     execute(message){
-        var other = client.channels.find('name', 'prosit-aller');
+        var other = client.channels.find('name', '📑prosit-aller');
         other.send("Voici le template", {
             file : "./Prosit.docx" 
         }

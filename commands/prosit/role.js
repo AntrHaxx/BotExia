@@ -4,7 +4,7 @@ module.exports = {
         "*": "*"
     },
     execute(message, args, client){
-        var channelRole = client.channels.find('name', 'role');
+        var channelRole = client.channels.find('name', '👥roles');
 
         const  pr = Load.json('pr');
         var { pro } = Load.json('prosit');
@@ -13,7 +13,8 @@ module.exports = {
         var tete = null;
         var role = null;
         var head = null;
-        cal = parseInt(pro) % pr.length;
+        pro = parseInt(pro);
+        cal = (parseInt(pro) %11)-1
 
         const commands = message.content.split(/ +/);
         const command = commands[0];
@@ -27,7 +28,7 @@ module.exports = {
         if (promo[cal] != undefined)
             tete = promo[cal];
         else 
-                return Msg.error("Tete non trouvée");
+            return Msg.error("Tete non trouvée");
 
         switch(rle)
         {

@@ -88,6 +88,10 @@ client.on('messageReactionAdd', (reaction, message, args, client) =>
         case '388631620002906112':
             Log.info("Vote pour aller manger en Enfer ");
 			results['enfer']++;
+        break;
+        case '904b7c9326d7282cce83957ae55fe61a':
+            Log.info("Vote pour manger chez lui");
+            results['maison']++;
         break;    
 	}
 	results = JSON.stringify(results);
@@ -100,6 +104,7 @@ client.on('messageReactionAdd', (reaction, message, args, client) =>
 
 client.on('messageReactionRemove', (reaction, member) =>
 {
+    var results = require('./json/voteManger.json');
     switch (reaction.emoji.id)
     {
     //McDo
@@ -126,7 +131,11 @@ client.on('messageReactionRemove', (reaction, member) =>
     case '388631620002906112':
         Log.info("-1 Vote pour aller manger en Enfer ");
 		results['enfer']--;
-	break;
+    break;
+    case '904b7c9326d7282cce83957ae55fe61a':
+        Log.info("-1 Vote pour manger chez lui");
+        results['maison']--;
+    break;
 	}
 	results = JSON.stringify(results);
 	fs.writeFile('./json/voteManger.json', results, 'utf8', function readFileCallback(err, data){

@@ -27,7 +27,7 @@ module.exports = {
             let command = Command.get(args[0]);
             // Si commande non trouvee afficher une erreur
             if (command == null)
-                return Msg.error('La commande **'+args[0]+'** n\'est pas une commande valide.\nTapez **'+Config.prefix+'help** pour avoir la liste des commandes');
+                return Msg.error('La commande **'+args[0]+'** n\'est pas une commande valide.\nTapez **'+config.prefix+'help** pour avoir la liste des commandes');
             else if (command.doc == null)
                 return Msg.error('Aucune documentation existante pour la commande **'+command.name+'**.');
             // Afficher la commande trouvee

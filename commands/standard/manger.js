@@ -6,15 +6,21 @@ module.exports = {
         "*": "*"
     },
     execute(message, args, client){
-        var other = client.channels.find('name', 'on-manj-ou');
-        other.send('@everyone ON MANG OU ?');
+        var other = client.channels.find('name', '🍔manger-au-̶b̶k̶-̶');
+        other.send('@everyone  \n\n▒█▀▀▀█ █▀▀▄ 　 █▀▄▀█ █▀▀█ █▀▀▄ █▀▀▀ █▀▀ 　 █▀▀█ █░░█ 　 ▀█'+ 
+                                '\n▒█░░▒█ █░░█ 　 █░▀░█ █▄▄█ █░░█ █░▀█ █▀▀ 　 █░░█ █░░█ 　 █▀'+
+                                '\n▒█▄▄▄█ ▀░░▀ 　 ▀░░░▀ ▀░░▀ ▀░░▀ ▀▀▀▀ ▀▀▀ 　 ▀▀▀▀ ░▀▀▀ 　 ▄░');
 
         const commands = message.content.split(/ +/);
         const command = commands[0];
         const manger = args.length ? args[0].toLowerCase() : null;
 
         var results = require('../../json/voteManger.json');
-        results['bk' && 'ange' && 'mcdo' && 'geant' && 'enfer'] =0;
+        results['bk'] = 0;
+        results['mcdo'] = 0;
+        results['ange'] = 0;
+        results['geant'] = 0;
+        results['enfer'] =0;
         
         results = JSON.stringify(results);
         var fs = require('fs');
