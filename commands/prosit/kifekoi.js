@@ -12,9 +12,7 @@ module.exports = {
         var prosit = null;
         var tete = null;
         pro = parseInt(pro);
-        cal = (parseInt(pro) %11)-1;
-
-        var role = client.channels.find("name", "👥roles");
+        cal = (parseInt(pro) %11);
 
         if (pr[cal] != undefined)
             prosit = pr[cal];
@@ -26,7 +24,7 @@ module.exports = {
         else 
             return Msg.error("Tete non trouvée");
 
-        scr = prosit.scribe;
+        //scr = prosit.scribe;
 
         const embed = {
             "title": "Kifekoi",
@@ -59,7 +57,7 @@ module.exports = {
                 }
             ]
         }; 
-        
+        var role = client.channels.find("name", "👥roles");
         role.send({embed});
     },
 }

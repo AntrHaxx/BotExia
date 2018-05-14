@@ -16,7 +16,7 @@ module.exports = {
         }
         message.channel.bulkDelete(amount, true).catch(err => {
             console.error(err);
-            message.channel.send('Il y a eu une erreur pour delte');
+            message.channel.send('Il y a eu une erreur pour delete');
         });
     }
 };
