@@ -144,7 +144,12 @@ client.on('messageReactionRemove', (reaction, member) =>
 });
 
 client.on('ready', () => {
-    client.users.get(config.instance_owner).send("*cron init");
+    try {
+        client.users.get(config.instance_owner).send("*cron init");
+    }
+    catch (e) {
+        return Log.warning("Valid property \"instance_owner\" must be given in", "json/config.json");
+    }
     Log.success("Pret a servir !", client.readyAt);
 });
 

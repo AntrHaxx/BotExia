@@ -2,7 +2,7 @@ module.exports = {
 	name: "test",
 	alias: ["ta1", "ta2"],
 	permissions: {
-		"*": ["none"]
+		"*": ["*"]
 	},
 	execute: function(message, args, client)
 	{
