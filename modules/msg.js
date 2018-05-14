@@ -176,7 +176,7 @@ var Msg = function ()
 			}
 		}
 
-		if (_is_empty(format) || target == null ||
+		if (_is_empty(format) ||
 			(typeof target != "object" && target != '*' && !this.channel_exists(target)))
 		{
 			Log.error("Channel "+target+" invalide");
