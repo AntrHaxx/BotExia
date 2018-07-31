@@ -1,6 +1,6 @@
 # BotExia
 
-BotExia est une application basée surle module Discord.js permettant de gérer un bot Discord. Vous aurez la possibilité de créer et gérer des commandes simplement sans avoir a vous soucier en plus des petits soucis d'a côté. L'application offre un assortiment de modules simplifiant au maximum le développement et enrichissant votre expérience.
+BotExia est une application basée sur le module Discord.js permettant de gérer un bot Discord. Vous aurez la possibilité de créer et gérer des commandes simplement sans avoir a vous soucier en plus des petits soucis d'a côté. L'application offre un assortiment de modules simplifiant au maximum le développement et enrichissant votre expérience.
 ## Fonctionnalites
 
 *	Creation de commandes personnalisees
