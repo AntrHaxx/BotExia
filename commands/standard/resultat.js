@@ -17,7 +17,7 @@ module.exports = {
 
         const embed = {
             "title": "Resultat",
-            "color": 004346,
+            "color": '004346',
             "description" :"Voici les resultat du vote",
       
             "footer": {
@@ -57,7 +57,7 @@ module.exports = {
 
         const embedManger = {
             "title": "Resultat",
-            "color": 004346,
+            "color": '004346',
             "description" :"@everyone Voici les resultat du vote",
       
             "footer": {

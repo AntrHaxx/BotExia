@@ -4,7 +4,7 @@ module.exports = {
         "*": "*"
     },
     execute(message, args, client){
-        var channelRole = client.channels.find('name', '👥roles');
+        var channelRole = client.channels.get('420865180541648896');
 
         const  pr = Load.json('pr');
         var { pro } = Load.json('prosit');

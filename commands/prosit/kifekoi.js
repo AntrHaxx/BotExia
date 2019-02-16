@@ -1,7 +1,5 @@
 module.exports = {
     name : "kifekoi",
-    description : "Sa sert pus a rien",
-    usage : "`*kifekoi`",
     permissions: {
         "*": "*"
     },
@@ -57,7 +55,6 @@ module.exports = {
                 }
             ]
         }; 
-        var role = client.channels.find("name", "👥roles");
-        role.send({embed});
+        client.channels.get('420865180541648896').send({embed});
     },
 }

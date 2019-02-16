@@ -11,6 +11,7 @@ module.exports = {
       return Msg.error("Ce n\'est pas une commande valide");
     Msg.format({
       "title": "Info",
+      "description": "Vocici les information à propos de la commande "+command.name,
       "color": "info",
 
       "footer": {
