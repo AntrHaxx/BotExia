@@ -4,7 +4,7 @@ module.exports = {
         "*": "*",
     },
     execute(message, args) {
-        for(var i = 0; i<1000; i++){
+        for(var i = 0; i<25; i++){
             Log.info(i);
             message.channel.send("*kivaferkoi 4");
         }

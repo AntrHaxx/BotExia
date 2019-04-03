@@ -115,7 +115,7 @@ module.exports = {
 
         function assign() {
             var n=0;
-            while(n<10000000){
+            while(n<1000){
                 var randomGuy = checkIfRandomIsAlreadyPicked();
                 n++;
             }
@@ -126,44 +126,44 @@ module.exports = {
             var table = [];
             assign();
 
-            Gurvan = (Gurvan / 10000000) * 100;
+            Gurvan = (Gurvan / 1000) * 100;
             table[0] = "Gurvan : "+Gurvan+"%";
             Log.info(Gurvan + "%");
 
-            MMouky = (MMouky / 10000000) * 100;
+            MMouky = (MMouky / 1000) * 100;
             table[1] = "Mmouky : "+MMouky+"%";
 
-            Erwan = (Erwan / 10000000) * 100;
+            Erwan = (Erwan / 1000) * 100;
             table[2] = "Erwann : "+Erwan+"%";
 
-            François = (François / 10000000) * 100;
+            François = (François / 1000) * 100;
             table[3] = "François : "+François+"%";
 
-            Kevkev = (Kevkev / 10000000) * 100;
+            Kevkev = (Kevkev / 1000) * 100;
             table[4] = "Kevkev : "+Kevkev+"%";
 
-            Pauline = (Pauline / 10000000) * 100;
+            Pauline = (Pauline / 1000) * 100;
             table[5] = "Pauline : "+Pauline+"%";
 
-            Benjamin = (Benjamin / 10000000) * 100;
+            Benjamin = (Benjamin / 1000) * 100;
             table[6] = "Benjamin : "+Benjamin+"%";
 
-            Louis = (Louis / 10000000) * 100;
+            Louis = (Louis / 1000) * 100;
             table[7] = "Louis : "+Louis+"%";
 
-            Julien = (Julien / 10000000) * 100;
+            Julien = (Julien / 1000) * 100;
             table[8] = "Julien : "+Julien+"%";
 
-            Remi = (Remi / 10000000) * 100;
+            Remi = (Remi / 1000) * 100;
             table[9] = "Remi : "+Remi+"%";
 
-            Gwn = (Gwn / 10000000) * 100;
+            Gwn = (Gwn / 1000) * 100;
             table[10] = "Gwn : "+Gwn+"%";
 
             return table;
         }
 
-        if (checkN() == 0) {
+        if (checkN() === 0) {
             Msg.kivaferkoi(stat());
         }
     }

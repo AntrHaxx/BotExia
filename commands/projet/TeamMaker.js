@@ -99,7 +99,7 @@ module.exports = {
             function isTeamFull(team) { // 0 = equipe pas pleine, 1 = equipeFull
                 var reponse1 =0;
                 for (i =0; i<4; i++) {
-                    if (equipe[team][i] != 11){
+                    if (equipe[team][i] !== 11){
                         reponse1 = 0
                     }
                 }
@@ -109,14 +109,14 @@ module.exports = {
             function execute() {
                 var everyoneHaveATeam =0;
 
-                while(everyoneHaveATeam != 1){
+                while(everyoneHaveATeam !== 1){
                     var peopleThatHaveATeam = 0;
                     for(i=0;i<11;i++){
-                        if (hasTeam[i] != 11){
+                        if (hasTeam[i] !== 11){
                             peopleThatHaveATeam++;
                             Log.info("peopleThatHaveATeam :" +peopleThatHaveATeam);
                         }
-                        if (peopleThatHaveATeam != 11){
+                        if (peopleThatHaveATeam !== 11){
                             everyoneHaveATeam = 0;
                             addRandomInTeam();
                             Log.info("everyoneHaveATeam ="+everyoneHaveATeam);
@@ -135,5 +135,5 @@ module.exports = {
 
         Log.info(makeTeam());
     },
-}
+};
 

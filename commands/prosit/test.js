@@ -1,5 +1,5 @@
 module.exports = {
-    name: "kivaferkoi",
+    name: "kvfk",
     permissions: {
         "*": "*",
     },
@@ -26,13 +26,15 @@ module.exports = {
          * Permet de recuperer les gens ayant deja fait une partie avant
          * @param args
          */
-        function getAlreadyPicked(args){
-            for(let a = 0; a < args.length; a++){
-                if(isNaN(args[a])){
-                    for(let b = 0; b<gens.length; b++){
-                        if(gens[b][0] === args[a]){
-                            gens.splice(b, 1);
-                        }
+        function getAlreadyPicked(args) {
+            let json = JSON.parse(fs.readFileSync("./json/kivaferkoi.json"));
+            for (let a = 0; a < json.AlreadyPicked.length; a++) {
+                let place = json.AlreadyPicked[a].toString().indexOf("<");
+                let name = json.AlreadyPicked[a].substring(0, place);
+                for (let b = 0; b < gens.length; b++) {
+                    if (json.AlreadyPicked[a].match(gens[b][0])) {
+                        Log.success("Name : "+name + " Tab : "+gens[b][0]);
+                        gens.splice(b, 1);
                     }
                 }
             }
@@ -149,22 +151,26 @@ module.exports = {
         function assign() {
             getAlreadyPicked(args);
             let table = setPartie();
+            let temp = JSON.parse(fs.readFileSync("./json/kivaferkoi.json"));
+            temp.AlreadyPicked = [];
             for (let b = 0; b < table.length; b++) {
                 const randomGuy = checkIfRandomIsAlreadyPicked();
                 if (randomGuy !== 0) {
                     table[b] = randomGuy;
+                    temp.AlreadyPicked[b] = randomGuy;
                 } else {
                     Log.error("Wsh la c pas normal");
                 }
             }
-            let out = JSON.stringify(table);
+            let out = JSON.stringify(temp);
+            fs.writeFileSync("./json/kivaferkoi.json", out);
             return table;
         }
 
         /**
          * Sur-verifie que le nombre de partie est inferieur a 11
          */
-        if(checkN() === 0){
+        if (checkN() === 0) {
             Msg.kivaferkoi(assign());
             Log.warning("-------------------------------------------");
         }
